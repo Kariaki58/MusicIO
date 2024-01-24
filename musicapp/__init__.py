@@ -15,15 +15,14 @@ def create_app():
     :return: app
     """
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'forsecretkey'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/musicappdb'
+    app.config.from_object('musicapp.settings')
 
-    from musicapp.models.likedb import Like
-    from musicapp.models.songdb import Song
-    from musicapp.models.userdb import User
-    from musicapp.models.commentdb import Comment
-    from musicapp.models.favouritedb import Favourite
-    from musicapp.models.dbmodels import BaseModel
+    from musicapp.models.like import Like
+    from musicapp.models.song import Song
+    from musicapp.models.user import User
+    from musicapp.models.comment import Comment
+    from musicapp.models.favourite import Favourite
+    from musicapp.models.base_model import BaseModel
     from musicapp.models.playlist import Playlist
 
     database.init_app(app)
@@ -32,8 +31,3 @@ def create_app():
     app.app_context().push() #this may work when commented.
 
     database.create_all()
-
-    @login_manager.user_loader
-    def load_user(id):
-        return User.query.get(int(id))
-    return app
