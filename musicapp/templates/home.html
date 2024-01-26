@@ -4,18 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/home_page.css">
-    <link rel="stylesheet" href="../static//css/base.css">
+    <link rel="stylesheet" href="../static/css/base.css">
     <title>Document</title>
 </head>
 <body>
     <h1>Welcome to MusicIO</h1>
     <div class="container">
         <div class="playlists">
-            <div class="btn-card card">
+            <div onclick="openModal()" class="btn-card card">
                 <h1>+</h1>
             </div>
-            <div class="card"></div>
+            <div class="card">
+                <!-- songs will display here on click -->
+            </div>
         </div>
     </div>
+    <div id="myModal" class="overlay">
+        <div class="modal">
+            <form action="" method="POST" class="form-input">
+                <input type="file" name="file" accept=".mp3, .ogg, .wav" class="upload">
+                <label for="fileInput" class="custom-upload-btn">Choose File</label>
+                <span class="file-name" id="fileName">No file chosen</span>
+                <input type="text" name="title" placeholder="music title" required>
+                <input type="text" name="artist_name" placeholder="artist name" required>
+                <input type="submit" value="submit">
+            </form>
+        </div>
+    </div>
+    <script src="../static/scripts/modal.js"></script>
 </body>
 </html>
