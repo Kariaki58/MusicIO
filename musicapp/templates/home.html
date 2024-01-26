@@ -5,28 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/home_page.css">
     <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/icon_styles.css">
+    <script src="https://kit.fontawesome.com/673cfa2228.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome to MusicIO</h1>
+    <!-- nav bar -->
     <div class="container">
         <div class="playlists">
             <div onclick="openModal()" class="btn-card card">
                 <h1>+</h1>
             </div>
             <div class="card">
-                <!-- songs will display here on click -->
+                <i class="fa-solid fa-play" id="icon"></i>
+                <div class="text">
+                    <h3>artist name</h3>
+                    <span>music title</span>
+                </div>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-play" id="icon"></i>
+                <div class="text">
+                    <h3>artist name</h3>
+                    <span>music title</span>
+                </div>
             </div>
         </div>
     </div>
     <div id="myModal" class="overlay">
         <div class="modal">
-            <form action="" method="POST" class="form-input">
-                <input type="file" name="file" accept=".mp3, .ogg, .wav" class="upload">
-                <label for="fileInput" class="custom-upload-btn">Choose File</label>
+            <form action="" method="" class="form-input">
+                <input type="file" name="file" accept=".mp3, .ogg, .wav" class="upload" id="fileInput" required>
+                <label for="fileInput" class="custom-upload-btn">Upload</label>
                 <span class="file-name" id="fileName">No file chosen</span>
                 <input type="text" name="title" placeholder="music title" required>
                 <input type="text" name="artist_name" placeholder="artist name" required>
+                <span class="error">show error message</span>
                 <input type="submit" value="submit">
             </form>
         </div>
