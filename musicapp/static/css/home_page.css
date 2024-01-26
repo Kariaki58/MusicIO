@@ -1,0 +1,40 @@
+.container {
+    max-width: 1100px;
+    color: white;
+    margin: auto auto;
+}
+
+.playlists {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 0.3em;
+    max-width: 200px;
+    height: 150px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: dimgray;
+}
+
+.upload-btn {
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    max-width: 200px;
+    width: 200px;
+    height: 150px;
+}
+
+.btn-card {
+    position: relative;
+}
+
+.btn-card h1 {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    font-size: 6rem;
+}
