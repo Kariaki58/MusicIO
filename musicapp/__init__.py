@@ -10,7 +10,7 @@ login_manager = LoginManager()
 def create_app():
     """
     TODO the key will be changed soon.
-    in app.config['SQLALCHEMY_DATABASE_URI'] = mysql://user@localhost/dbname
+    in app.config['SQLALCHEMY_DATABASE_URI'] = mysql://user:password@localhost/dbname
     the dbname should be named app
     :return: app
     """
@@ -31,3 +31,5 @@ def create_app():
     app.app_context().push() #this may work when commented.
 
     database.create_all()
+
+    return app
