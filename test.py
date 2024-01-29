@@ -7,10 +7,10 @@ from musicapp.models.favourite import Favourite
 from musicapp.models.playlist import Playlist
 
 
-from run import app
+from musicapp.run import app
 
 
-if not app:
+if  app:
     user = User(email="jjj@gmaddskl.c", password="1323", username="cory")
 
     song = Song(title="fire masnxxy", artist_name="asndrew tate v2", song_path="~/home/dirfd", user=user)
