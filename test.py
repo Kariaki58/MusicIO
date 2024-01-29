@@ -7,11 +7,16 @@ from musicapp.models.favourite import Favourite
 from musicapp.models.playlist import Playlist
 
 
-from run import app
+from musicapp.run import app
 
 
+<<<<<<< HEAD
 if app:
     user = User(email="jjjfda2@gmaddskl.c", password="132sdfa32", username="cfdory2")
+=======
+if  app:
+    user = User(email="jjj@gmaddskl.c", password="1323", username="cory")
+>>>>>>> feature_home
 
     song = Song(title="fire masfdanxxy2", artist_name="asndrewfds2 tate v2", song_path="~/hofdsaf2me/dirfd", user=user)
     user_q = User.query.all()

@@ -10,7 +10,7 @@ FLASK_CSRF_ENABLED = True
 SECRET_KEY = 'forsecretkey'
 
 # Flask-SQLAlchemy settings
-SQLALCHEMY_DATABASE_URI = 'mysql://root@127.0.0.1/musicappdb'
+SQLALCHEMY_DATABASE_URI = 'mysql://root@localhost/musicappdb'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Flask-User settings

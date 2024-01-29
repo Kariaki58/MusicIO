@@ -1,0 +1,152 @@
+.container {
+    max-width: 1100px;
+    color: white;
+    margin: auto auto;
+}
+
+.playlists {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    position: relative;
+    cursor: pointer;
+    margin: 0.3em;
+    max-width: 200px;
+    height: 150px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: dimgray;
+}
+
+.card:hover {
+    box-shadow: rgba(163, 200, 237, 1) 0px 8px 24px 8px;
+}
+
+.upload-btn {
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    max-width: 200px;
+    width: 200px;
+    height: 150px;
+}
+
+.btn-card {
+    cursor: pointer;
+    position: relative;
+}
+
+.btn-card h1 {
+    cursor: pointer;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    font-size: 6rem;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.modal {
+    background: #fff;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.close-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #888;
+}
+
+.form-input {
+    max-width: 400px;
+    width: 400px;
+    height: 400px;
+    padding: 1em;
+}
+
+input[type="text"] {
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgb(75, 15, 15);
+}
+
+input {
+    font-size: 1rem;
+    width: 80%;
+    padding: 1rem;
+    margin-bottom: 2em;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 2.2em;
+}
+
+input[value="submit"]:hover {
+    cursor: pointer;
+    background-color: blueviolet;
+}
+
+.upload {
+    display: none;
+}
+
+label {
+    width: 80%;
+    margin-top: 2em;
+    margin-bottom: 0.3em;
+}
+
+span.file-name {
+    margin-bottom: 3em;
+}
+
+.custom-upload-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.file-name {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+
+.error {
+    display: inline-block;
+    color: red;
+    margin-bottom: 0.5em;
+}
+
+.text h3{
+    margin: 0;
+}
+.text {
+    position: absolute;
+    font-size: 14px;
+    top: 70%;
+    left: 0%;
+    transform: translate(70%, 0%);
+}
