@@ -2,6 +2,7 @@ from musicapp import database
 from musicapp.models.base_model import BaseModel
 
 
+
 class Favourite(BaseModel, database.Model):
     __tablename__ = 'favourites'
     """

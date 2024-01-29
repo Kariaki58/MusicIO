@@ -4,6 +4,8 @@ from musicapp import database
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
+
+
 class User(BaseModel, database.Model, UserMixin):
 
     __tablename__ = 'users'
