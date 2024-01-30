@@ -28,7 +28,7 @@
     </div>
     <div id="myModal" class="overlay">
         <div class="modal">
-            <form action="" method="POST" class="form-input" enctype="multipart/form-data">
+            <form action="" method="POST" class="form-input">
                 <input type="file" name="file" accept=".mp3, .ogg, .wav" class="upload" id="fileInput" required>
                 <label for="fileInput" class="custom-upload-btn">Upload</label>
                 <span class="file-name" id="fileName">No file chosen</span>
@@ -39,6 +39,15 @@
             </form>
         </div>
     </div>
+    <!-- <div class="alerts">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                <span class="alert-item {{ category }}">{{ message }}</span>
+                {% endfor %}
+            </div>
+        {% endwith %}
+    </div> -->
     <script src="../static/scripts/modal.js"></script>
 </body>
 </html>

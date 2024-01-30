@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, jsonify, request
+from flask import Flask, Blueprint, render_template, jsonify, request, redirect, flash
 from werkzeug.utils import secure_filename
 from flask_login import current_user
 import os
@@ -13,7 +13,7 @@ def allowed_file(filename):
     return False
 
 
-def handle_user_form():
+def handle_user_form(title, artist_name, file):
     from musicapp.run import app
     from musicapp.models.playlist import Playlist
     from musicapp.models.user import User
@@ -21,9 +21,7 @@ def handle_user_form():
     from musicapp import database
 
 
-    title = request.form.get('title')
-    artist_name = request.form.get('artist_name')
-    file = request.files.get('file')
+    
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         try:
@@ -39,19 +37,19 @@ def handle_user_form():
 
         new_filepath = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
         os.rename(filepath, new_filepath)
-        
         app_user = current_user.get_id()
         playlist_query = Playlist.query.filter(Playlist.user_id==app_user).first()
         playlist_is_valid = playlist_query is None
         if playlist_is_valid:
             new_playlist = Playlist(title=title, user_id=app_user)
             database.session.add(new_playlist)
+            song_path = f'{app.config["UPLOAD_FOLDER"]}/{new_filename}'
             database.session.commit()
-            new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=new_playlist.id)
+            new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=new_playlist.id, song_path=new_filepath)
             database.session.add(new_song)
             database.session.commit()
             return
-        new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=playlist_query.id)
+        new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=playlist_query.id, song_path=new_filepath)
         database.session.add(new_song)
         database.session.commit()
 
@@ -60,10 +58,15 @@ def handle_user_form():
 def home_page():
     from musicapp.models.playlist import Playlist
     from musicapp.models.song import Song
-    if request.method == 'POST':
-        handle_user_form()
+
+
+    title = request.form.get('title')
+    artist_name = request.form.get('artist_name')
+    file = request.files.get('file')
     content_list = []
     playlist = Playlist.query.all()
+    if request.method == 'POST':
+        handle_user_form(title, artist_name, file)
     for data in playlist:
         playlists = data.to_dict()
         playlists.pop('_sa_instance_state', None)

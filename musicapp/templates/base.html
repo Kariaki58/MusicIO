@@ -11,13 +11,13 @@
 </head>
 <body>
         <div class="alerts">
-		{% with messages = get_flashed_messages(with_categories=True) %}
-		    <div class="flashes">
-			    {% for category, message in messages %}
-			      <span class="alert-item {{ category }}">{{ message }}</span>
-			    {% endfor %}
-	        </div>
-		{% endwith %}
+			{% with messages = get_flashed_messages(with_categories=True) %}
+				<div class="flashes">
+					{% for category, message in messages %}
+					<span class="alert-item {{ category }}">{{ message }}</span>
+					{% endfor %}
+				</div>
+			{% endwith %}
         </div>
 		{% block content %}{% endblock %}
 		<script src="./static/scripts/login_script.js"></script>
