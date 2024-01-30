@@ -78,10 +78,6 @@ body {
     text-decoration: underline;
 }
 
-button:hover {
-    background-color: #448f48;
-}
-
 a {
     text-decoration: underline;
     color: #000;
