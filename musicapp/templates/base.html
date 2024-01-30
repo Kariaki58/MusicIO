@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %}<title>Login Page</title>{% endblock %}
+    <title>{% block title %}Login Page{% endblock %}</title>
     {% block header %}{% endblock %}
 </head>
 
@@ -12,10 +12,11 @@
 		{% with messages = get_flashed_messages(with_categories=True) %}
 		    <ul class="flashes">
 			    {% for category, message in messages %}
-			      <li class="alert-item {{ category }}">{{ messages }}></li>
+			      <li class="alert-item {{ category }}">{{ message }}</li>
 			      {% endfor %}
 	             </ul>
 		{% endwith %}
+        </div>
 	{% block content %}{% endblock %}
 	{% block scripts %}{% endblock %}
     </body>
