@@ -3,20 +3,15 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             const allArtistName = document.querySelectorAll('.artist_name');
-            const allArtistTitle = document.querySelectorAll('.artist_title')
-            console.log(data)
+            const allArtistTitle = document.querySelectorAll('.artist_title');
             for (let i = 0; i < data.length; i++) {
-                allArtistName.forEach((name) => {
-                    console.log(name)
-                    console.log(data[i].artist_name)
-                    name.innerHTML = data[i].artist_name;
-                })
-            }
-            allArtistTitle.forEach((name) => {
-                for (let i = 0; i < data.length; i++) {
-                    name.innerHTML = data[i].title;
+                if (allArtistName[i]) {
+                    allArtistName[i].innerHTML = data[i].artist_name;
                 }
-            })
+                if (allArtistTitle[i]) {
+                    allArtistTitle[i].innerHTML = data[i].title;
+                }
+            }
         })
         .catch(error => console.error('Error fetching data:', error));
 });

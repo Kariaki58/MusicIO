@@ -143,10 +143,10 @@ span.file-name {
 .text h3{
     margin: 0;
 }
+
 .text {
     position: absolute;
     font-size: 14px;
-    top: 70%;
-    left: 0%;
-    transform: translate(70%, 0%);
+    margin-left: 1em;
+    top: 100px
 }
