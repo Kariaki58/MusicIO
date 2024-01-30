@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>Login Page</title>{% endblock %}
+    {% block header %}{% endblock %}
+</head>
+
+<body>
+        <div class="alerts">
+		{% with messages = get_flashed_messages(with_categories=True) %}
+		    <ul class="flashes">
+			    {% for category, message in messages %}
+			      <li class="alert-item {{ category }}">{{ messages }}></li>
+			      {% endfor %}
+	             </ul>
+		{% endwith %}
+	{% block content %}{% endblock %}
+	{% block scripts %}{% endblock %}
+    </body>
+</html>
+

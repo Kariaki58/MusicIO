@@ -31,3 +31,4 @@ def create_app():
     app.app_context().push() #this may work when commented.
 
     database.create_all()
+    return app
