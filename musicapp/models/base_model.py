@@ -11,7 +11,7 @@ class BaseModel:
 
 
     def __str__(self):
-        return self.__dict__
+        return f'{self.__dict__}'
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of the instance"""

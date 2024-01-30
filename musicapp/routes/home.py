@@ -18,6 +18,7 @@ def handle_user_form():
     from musicapp.models.playlist import Playlist
     from musicapp.models.user import User
     from musicapp.models.song import Song
+    from musicapp import database
 
 
     title = request.form.get('title')
@@ -34,23 +35,33 @@ def handle_user_form():
         file.save(filepath)
 
         new_filename = f'{title}.mp3'
+        new_filename = new_filename.replace(' ', '_')
+
         new_filepath = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
         os.rename(filepath, new_filepath)
         
         app_user = current_user.get_id()
-
-        new_playlist = Playlist(title, user_id=app_user, song_id=None)
-        
+        playlist_query = Playlist.query.filter(Playlist.user_id==app_user).first()
+        playlist_is_valid = playlist_query is None
+        if playlist_is_valid:
+            new_playlist = Playlist(title=title, user_id=app_user)
+            database.session.add(new_playlist)
+            database.session.commit()
+            new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=new_playlist.id)
+            database.session.add(new_song)
+            database.session.commit()
+            return
+        new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=playlist_query.id)
+        database.session.add(new_song)
+        database.session.commit()
 
 
 @home.route('/', methods=['GET', 'POST'])
 def home_page():
     from musicapp.models.playlist import Playlist
     from musicapp.models.song import Song
-    
     if request.method == 'POST':
-        handle_user_form()        
-
+        handle_user_form()
     content_list = []
     playlist = Playlist.query.all()
     for data in playlist:
