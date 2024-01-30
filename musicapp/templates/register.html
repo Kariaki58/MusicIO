@@ -1,9 +1,4 @@
 {% extends "base.html" %}
-{% block header %}
-<link rel="stylesheet" href="../static/css/registration_style.css">
-<meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-{% endblock %}
 {% block title %}Registration Form{% endblock %}
 {% block content %}
    <div class="form-container">
@@ -38,5 +33,4 @@
             </div>
         </form>
     </div>
-  {% endblock %}
-  {% block scripts %}<script src="../static/scripts/registration_script.js"></script>{% endblock %}
+{% endblock %}

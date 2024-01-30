@@ -16,25 +16,19 @@
             <div onclick="openModal()" class="btn-card card">
                 <h1>+</h1>
             </div>
-            <div class="card">
-                <i class="fa-solid fa-play" id="icon"></i>
-                <div class="text">
-                    <h3>artist name</h3>
-                    <span>music title</span>
+            {% for data in content_list %}
+                <div class="card">
+                    <i class="fa-solid fa-play" id="icon"></i>
+                    <div class="text">
+                        <h4>{{ data.title }}</h4>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <i class="fa-solid fa-play" id="icon"></i>
-                <div class="text">
-                    <h3>artist name</h3>
-                    <span>music title</span>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <div id="myModal" class="overlay">
         <div class="modal">
-            <form action="" method="" class="form-input">
+            <form action="" method="POST" class="form-input" enctype="multipart/form-data">
                 <input type="file" name="file" accept=".mp3, .ogg, .wav" class="upload" id="fileInput" required>
                 <label for="fileInput" class="custom-upload-btn">Upload</label>
                 <span class="file-name" id="fileName">No file chosen</span>

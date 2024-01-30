@@ -15,21 +15,21 @@ def login():
 def post_login():
     user = User.query.filter(User.email == request.form.get('email')).first()
     if not user:
-        flash('username or password not valid, please try again', 'error')
+        flash('username or password not valid, please try again', category='error')
         return redirect(url_for('auth_views.login'))
     if not user.verify_password(request.form.get('password')):
-        flash('username or password not valid, please try again', 'error')
+        flash('username or password not valid, please try again', category='error')
         return redirect(url_for('auth_views.login'))
 
     login_user(user)
     
     flash('you have successfully login', 'success')
-    return redirect(url_for('index'))
+    return redirect(url_for('home.home_page'))
 
 @auth_views.route('/logout', methods=['GET', 'POST'])
 def logout():
     logout_user()
-    flash('You have logged out!', 'info')
+    flash('You have logged out!', category='info')
     return redirect(url_for('auth_views.login'))
 
 @auth_views.route('/signup', methods=['GET'])
@@ -41,15 +41,15 @@ def register():
 def post_register():
     error = False
     email_exists = User.query.filter(User.email == request.form.get('email')).first()
-    if email_exists:
-        flash('email already exists', 'error')
-        error=True
     username_exists = User.query.filter(User.username == request.form.get('username')).first()
-    if username_exists:
-        flash('username already exists', 'error')
+    if email_exists:
+        flash('email already exists', category='error')
+        error=True
+    elif username_exists:
+        flash('username already exists', category='error')
         error = True
-    if request.form.get('password') != request.form.get('password_confirm'):
-        flash('passwords don\'t match', 'error')
+    elif request.form.get('password') != request.form.get('password_confirm'):
+        flash('passwords don\'t match', category='error')
         error=True
 
     if error:
@@ -57,7 +57,7 @@ def post_register():
     user = User(email=request.form.get('email'), username=request.form.get('username'), password=request.form.get('password'))
     database.session.add(user)
     database.session.commit()
-    flash('user successfully registered, Please login now', 'success')
+    flash('user successfully registered, Please login now', category='success')
     return redirect(url_for('auth_views.login'))
 
 

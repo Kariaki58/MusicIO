@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Login Page{% endblock %}</title>
-    {% block header %}{% endblock %}
+	<link rel="stylesheet" href="./static/css/login_style.css">
+	<link rel="stylesheet" href="../static/css/registration_style.css">
+	<meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
-
 <body>
         <div class="alerts">
 		{% with messages = get_flashed_messages(with_categories=True) %}
-		    <ul class="flashes">
+		    <div class="flashes">
 			    {% for category, message in messages %}
-			      <li class="alert-item {{ category }}">{{ message }}</li>
-			      {% endfor %}
-	             </ul>
+			      <span class="alert-item {{ category }}">{{ message }}</span>
+			    {% endfor %}
+	        </div>
 		{% endwith %}
         </div>
-	{% block content %}{% endblock %}
-	{% block scripts %}{% endblock %}
+		{% block content %}{% endblock %}
+		<script src="./static/scripts/login_script.js"></script>
+		<script src="../static/scripts/registration_script.js"></script>
     </body>
 </html>
 
