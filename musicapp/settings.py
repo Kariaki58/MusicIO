@@ -3,6 +3,7 @@ import os
 # Application settings
 DEBUG = True
 APP_NAME = "MusicIO"
+SERVER_HOST='localhost'
 APP_SYSTEM_ERROR_SUBJECT_LINE = APP_NAME + " system error"
 
 # Flask settings
@@ -17,3 +18,13 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 USER_APP_NAME = APP_NAME
 USER_AFTER_LOGIN_ENDPOINT = 'main.dashboard'
 USER_AFTER_LOGOUT_ENDPOINT = 'main.login'
+
+#Email settings
+MAIL_SERVER='smtp.gmail.com'
+MAIL_PORT=465
+MAIL_USERNAME=''
+MAIL_PASSWORD=''
+MAIL_DEFAULT_SENDER='info@musicio.com'
+MAIL_USE_SSL=True
+MAIL_USE_TLS=False
+RESET_TEMPLATE= '<p>Dear {}</p></br></br> You have requested to reset your password, Please click the  link to reset your password <a href="{}"                 >Reset</a></br></br> <p>if you didn\'t request to reset your password, please ignore this email</p>' 

@@ -1,11 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_mail import Mail
 
 
 database = SQLAlchemy()
 login_manager = LoginManager()
-
+mail = Mail()
 
 def create_app():
     """
@@ -27,6 +28,7 @@ def create_app():
 
     database.init_app(app)
     login_manager.init_app(app)
+    mail.init_app(app)
 
     app.app_context().push() #this may work when commented.
 
