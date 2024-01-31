@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Login Page{% endblock %}</title>
-	<link rel="stylesheet" href="./static/css/login_style.css">
-	<link rel="stylesheet" href="../static/css/registration_style.css">
+    <title>{% block title %}Document{% endblock %}</title>
+	{% block css %}
+	{% endblock %}
+	<script src="https://kit.fontawesome.com/673cfa2228.js" crossorigin="anonymous"></script>
 	<meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID">
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
@@ -22,6 +23,7 @@
 		{% block content %}{% endblock %}
 		<script src="./static/scripts/login_script.js"></script>
 		<script src="../static/scripts/registration_script.js"></script>
+		<script src="../static/scripts/modal.js"></script>
     </body>
 </html>
 

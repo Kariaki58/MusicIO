@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/home_page.css">
-    <link rel="stylesheet" href="../static/css/base.css">
-    <link rel="stylesheet" href="../static/css/icon_styles.css">
-    <script src="https://kit.fontawesome.com/673cfa2228.js" crossorigin="anonymous"></script>
-    <title>Document</title>
-</head>
-<body>
-    <!-- nav bar -->
+{% extends 'base.html' %}
+{% block css %}
+<link rel="stylesheet" href="../static/css/home_page.css">
+<link rel="stylesheet" href="../static/css/base.css">
+<link rel="stylesheet" href="../static/css/icon_styles.css">
+{% endblock %}
+{% block title %}
+Home Page
+{% endblock %}
+{% block content %}
     <div class="container">
         <div class="playlists">
             <div onclick="openModal()" class="btn-card card">
@@ -30,24 +27,13 @@
         <div class="modal">
             <form action="" method="POST" class="form-input">
                 <input type="file" name="file" accept=".mp3, .ogg, .wav" class="upload" id="fileInput" required>
-                <label for="fileInput" class="custom-upload-btn">Upload</label>
-                <span class="file-name" id="fileName">No file chosen</span>
+                <label for="fileInput" class="custom-upload-btn">Upload Song</label>
+                <span class="file-name" id="fileName">No Song Uploaded</span>
                 <input type="text" name="title" placeholder="music title" required>
                 <input type="text" name="artist_name" placeholder="artist name" required>
-                <span class="error">show error message</span>
+                <span class="error"></span>
                 <input type="submit" value="submit">
             </form>
         </div>
     </div>
-    <!-- <div class="alerts">
-        {% with messages = get_flashed_messages(with_categories=True) %}
-            <div class="flashes">
-                {% for category, message in messages %}
-                <span class="alert-item {{ category }}">{{ message }}</span>
-                {% endfor %}
-            </div>
-        {% endwith %}
-    </div> -->
-    <script src="../static/scripts/modal.js"></script>
-</body>
-</html>
+{% endblock content %}

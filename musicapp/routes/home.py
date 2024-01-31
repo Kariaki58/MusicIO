@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, render_template, jsonify, request, redirect, flash
 from werkzeug.utils import secure_filename
-from flask_login import current_user
+from flask_login import current_user, login_required
 import os
 
 
@@ -54,6 +54,7 @@ def handle_user_form(title, artist_name, file):
         database.session.commit()
 
 
+@login_required
 @home.route('/', methods=['GET', 'POST'])
 def home_page():
     from musicapp.models.playlist import Playlist
