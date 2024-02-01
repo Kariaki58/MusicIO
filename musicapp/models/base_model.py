@@ -4,7 +4,6 @@ from sqlalchemy.ext.declarative import declared_attr
 
 
 class BaseModel:
-   # __abstract__ = True
     id = database.Column(database.Integer, primary_key=True)
     created_at = database.Column(database.DateTime(timezone=True), default=func.now())
     updated_at = database.Column(database.DateTime(timezone=True), default=func.now(), nullable=False)
