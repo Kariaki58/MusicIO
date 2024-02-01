@@ -15,10 +15,16 @@
                 <label for="loginPassword">Password:</label>
                 <input type="password" id="loginPassword" name="password" required>
             </div>
+	    {% if next %}
+	     <input type="hidden" id="nextUrl" name="next">
+	    {% endif %}
             <div class="form-group">
                 <button type="submit">Login</button>
             </div>
             <div class="switch">
+                <p>Forgot password? <a href="/reset_password">Reset</a></p>
+            </div>
+	    <div class="switch">
                 <p>Don't have an account? <a href="/signup">Register here</a></p>
             </div>
         </form>

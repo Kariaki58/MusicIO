@@ -13,6 +13,8 @@ class User(BaseModel, database.Model, UserMixin):
     email = database.Column(database.String(120), unique=True, nullable=False)
     password = database.Column(database.String(200), nullable=False)
     username = database.Column(database.String(120), unique=True, nullable=False)
+    confirm_token = database.Column(database.String(32))
+    reset_token = database.Column(database.String(22))
     playlists = database.relationship('Playlist', backref="user", passive_deletes=True)
     songs = database.relationship('Song', backref='user', passive_deletes=True)
     comments = database.relationship('Comment', backref='user', passive_deletes=True)
