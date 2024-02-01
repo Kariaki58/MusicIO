@@ -1,7 +1,6 @@
-
 from flask import (
     Flask, Blueprint, render_template, jsonify, request, redirect, flash,
-    jsonify, url_for
+    jsonify, url_for, make_response
 )
 from werkzeug.utils import secure_filename
 from flask_login import current_user, login_required
@@ -25,7 +24,6 @@ def handle_user_form(title, artist_name, file):
     from musicapp import database
 
 
-    
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         try:
@@ -42,6 +40,8 @@ def handle_user_form(title, artist_name, file):
         new_filepath = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
         os.rename(filepath, new_filepath)
         app_user = current_user.get_id()
+        if app_user is None:
+            return app_user
         playlist_query = Playlist.query.filter(Playlist.user_id==app_user).first()
         playlist_is_valid = playlist_query is None
         if playlist_is_valid:
@@ -52,51 +52,48 @@ def handle_user_form(title, artist_name, file):
             new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=new_playlist.id, song_path=new_filepath)
             database.session.add(new_song)
             database.session.commit()
-            return
+            return True
         new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=playlist_query.id, song_path=new_filepath)
         database.session.add(new_song)
         database.session.commit()
+        return True
     return False
+
 
 def user_input_validation(title, artist_name):
     from musicapp.models.song import Song
     
     songs = Song.query.filter(Song.title==title).first()
-    print(songs)
-    print("here")
-    if songs:
-        return True
-    return False
+    if songs is None:
+        return False
+    return True
 
-@home.route('/', methods=['GET', 'POST'])
-def home_page():
+
+def query_playlist():
     from musicapp.models.playlist import Playlist
-    from musicapp.models.song import Song
 
-
-    title = request.form.get('title')
-    artist_name = request.form.get('artist_name')
-    file = request.files.get('file')
     content_list = []
-
     playlist = Playlist.query.all()
-    if request.method == 'POST':
-        error = False
-        if user_input_validation(title, artist_name):
-            error = {
-                'error': 'title already exist'
-            }
-            return render_template('home.html', error=error)
-        
-        elif not handle_user_form(title, artist_name, file):
-            error = True
-            flash('you are not logedin')
-
-        if error:
-            return redirect(url_for('auth_views.login'))
-        
     for data in playlist:
         playlists = data.to_dict()
         playlists.pop('_sa_instance_state', None)
         content_list.append(playlists)
+    return content_list
+
+
+@home.route('/', methods=['GET', 'POST'])
+def home_page():
+    from musicapp.models.song import Song
+
+    if request.method == 'POST':
+        title = request.form.get('title')
+        artist_name = request.form.get('artist_name')
+        file = request.files.get('file')
+        if user_input_validation(title, artist_name):
+            content_list = query_playlist()
+            return render_template('home.html', content_list=content_list)
+        
+        if handle_user_form(title, artist_name, file) is None:
+            return redirect(url_for('auth_views.login'))
+    content_list = query_playlist()
     return render_template('home.html', content_list=content_list)
