@@ -1,6 +1,6 @@
 from flask import (
     Flask, Blueprint, render_template, jsonify, request, redirect, flash,
-    jsonify
+    jsonify, url_for
 )
 from werkzeug.utils import secure_filename
 from flask_login import current_user, login_required
@@ -100,7 +100,7 @@ def home_page():
             flash('you are not logedin')
 
         if error:
-            return redirect('login')
+            return redirect(url_for('auth_views.login'))
         
     playlist = Playlist.query.all()
     for data in playlist:

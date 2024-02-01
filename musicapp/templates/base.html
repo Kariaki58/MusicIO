@@ -24,7 +24,9 @@
 		<script src="./static/scripts/login_script.js"></script>
 		<script src="../static/scripts/registration_script.js"></script>
 		<script src="../static/scripts/modal.js"></script>
+		{% if id %}
+		{% else %}
 		<script src="../static/scripts/api.js"></script>
+		{% endif %}
     </body>
 </html>
-
