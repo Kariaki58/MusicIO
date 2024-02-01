@@ -7,8 +7,8 @@ class Song(BaseModel, database.Model):
     """
     user songs uploads
     """
-    title = database.Column(database.String(255), nullable=False, unique=True)
-    artist_name = database.Column(database.String(120), nullable=False)
+    title = database.Column(database.String(255), nullable=False)
+    artist_name = database.Column(database.String(120), nullable=False, unique=True)
     song_path = database.Column(database.String(255), nullable=False)
     user_id = database.Column(database.Integer, database.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     playlist_id = database.Column(database.Integer, database.ForeignKey('playlists.id', ondelete='CASCADE'), nullable=False)
