@@ -150,3 +150,7 @@ span.file-name {
     left: 0%;
     transform: translate(70%, 0%);
 }
+
+a {
+    color: black;
+}
