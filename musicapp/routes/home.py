@@ -85,15 +85,16 @@ def query_playlist():
 def home_page():
     from musicapp.models.song import Song
 
+    content_list = query_playlist()
+
     if request.method == 'POST':
         title = request.form.get('title')
         artist_name = request.form.get('artist_name')
         file = request.files.get('file')
         if user_input_validation(title, artist_name):
-            content_list = query_playlist()
-            return render_template('home.html', content_list=content_list)
+            #the bug is still here...
+            return render_template('home.html', content_list=content_list, error="file choose")
         
         if handle_user_form(title, artist_name, file) is None:
             return redirect(url_for('auth_views.login'))
-    content_list = query_playlist()
     return render_template('home.html', content_list=content_list)
