@@ -11,10 +11,13 @@ body {
 
 .form-container {
     background-color: #fff;
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    max-width: 400px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-container h2 {
@@ -43,6 +46,10 @@ body {
     border-radius: 4px;
 }
 
+.form-group input:hover {
+    background-color: #f1ecec;
+}
+
 .form-group button {
     background-color: #4caf50;
     color: #fff;
@@ -69,4 +76,13 @@ body {
 
 .form-group .switch a:hover {
     text-decoration: underline;
+}
+
+a {
+    text-decoration: underline;
+    color: #000;
+}
+
+a:hover {
+    background-color: #f1ecec;
 }
