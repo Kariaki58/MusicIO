@@ -81,7 +81,7 @@ def query_playlist():
     return content_list
 
 
-@home.route('/', methods=['GET', 'POST'])
+@home.route('/home', methods=['GET', 'POST'])
 def home_page():
     from musicapp.models.song import Song
 
