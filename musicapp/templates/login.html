@@ -1,26 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/login_style.css">
-    <title>Login Page</title>
-</head>
-
-<body>
-
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" href="./static/css/login_style.css">
+{% endblock css %}
+{% block title %}Login Form{% endblock %}
+{% block content %}
     <div class="form-container">
         <h5>Welcome Back!</h5>
         <h2>Sign In</h2>
         <form action="#" method="post" id="loginForm">
             <div class="form-group">
-                <label for="loginUsername">Username:</label>
-                <input type="text" id="loginUsername" name="loginUsername" required>
+                <input type="email" id="loginUsername" name="email" placeholder="Enter your email" required>
             </div>
         
             <div class="form-group">
-                <label for="loginPassword">Password:</label>
-                <input type="password" id="loginPassword" name="password" required>
+                <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
             </div>
 	    {% if next %}
 	     <input type="hidden" id="nextUrl" name="next">
@@ -34,15 +27,11 @@
             </div>
         
             <div class="switch">
-                <p>Forgot password? <a href="/reset_password">Reset</a></p>
+                <p>Forgot password? <a href="/reset_password" class="a-tag">Reset</a></p>
             </div>
-	    <div class="switch">
-                <p>Don't have an account? <a href="/signup">Register here</a></p>
+	        <div class="switch">
+                <p>Don't have an account? <a href="/signup" class="a-tag">Register here</a></p>
             </div>
         </form>
     </div>
- {% endblock %}
- {% block scripts %} <script src="./static/scripts/login_script.js"></script>{% endblock %}
-
-    </body>
-</html>
+{% endblock %}

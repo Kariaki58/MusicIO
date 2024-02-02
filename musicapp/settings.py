@@ -19,6 +19,11 @@ USER_APP_NAME = APP_NAME
 USER_AFTER_LOGIN_ENDPOINT = 'main.dashboard'
 USER_AFTER_LOGOUT_ENDPOINT = 'main.login'
 
+PRESERVE_CONTEXT_ON_EXCEPTION = False
+
+UPLOAD_FOLDER = 'uploads'
+
+ALLOWED_EXTENSIONS = {'mp3', 'wav', 'ogg'}
 #Email settings
 MAIL_SERVER='smtp.gmail.com'
 MAIL_PORT=465

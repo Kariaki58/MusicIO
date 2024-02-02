@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from musicapp.routes.home import home
+from flask_cors import CORS
 from flask_mail import Mail
 
 
@@ -16,7 +18,10 @@ def create_app():
     :return: app
     """
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object('musicapp.settings')
+    # app.config['UPLOAD_FOLDER'] = 'uploads'
+    # app.config['ALLOWED_EXTENSIONS'] = {'mp3', 'wav', 'ogg'}
 
     from musicapp.models.like import Like
     from musicapp.models.song import Song
@@ -30,7 +35,9 @@ def create_app():
     login_manager.init_app(app)
     mail.init_app(app)
 
-    app.app_context().push() #this may work when commented.
 
-    database.create_all()
+    app.register_blueprint(home)
+
+    with app.app_context():
+        database.create_all()
     return app

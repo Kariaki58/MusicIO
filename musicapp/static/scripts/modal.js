@@ -12,6 +12,7 @@ window.onclick = function(event) {
     }
 };
 
-document.getElementById('fileInput').addEventListener('change', function () {
+document.getElementById('fileInput').addEventListener('change', function (e) {
+    e.preventDefault()
     document.getElementById('fileName').innerText = this.value.split('\\').pop();
 });
