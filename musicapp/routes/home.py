@@ -71,7 +71,6 @@ def user_input_validation(title, artist_name):
 
 def query_playlist():
     from musicapp.models.playlist import Playlist
-
     content_list = []
     playlist = Playlist.query.all()
     for data in playlist:
@@ -81,7 +80,8 @@ def query_playlist():
     return content_list
 
 
-@home.route('/home', methods=['GET', 'POST'])
+@home.route('/home')
+@home.route('/', methods=['GET', 'POST'])
 def home_page():
     from musicapp.models.song import Song
 
@@ -97,4 +97,5 @@ def home_page():
         
         if handle_user_form(title, artist_name, file) is None:
             return redirect(url_for('auth_views.login'))
+        content_list = query_playlist()
     return render_template('home.html', content_list=content_list)

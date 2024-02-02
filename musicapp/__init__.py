@@ -20,8 +20,6 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
     app.config.from_object('musicapp.settings')
-    # app.config['UPLOAD_FOLDER'] = 'uploads'
-    # app.config['ALLOWED_EXTENSIONS'] = {'mp3', 'wav', 'ogg'}
 
     from musicapp.models.like import Like
     from musicapp.models.song import Song
