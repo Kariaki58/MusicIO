@@ -11,13 +11,14 @@ FLASK_CSRF_ENABLED = True
 SECRET_KEY = 'forsecretkey'
 
 # Flask-SQLAlchemy settings
-SQLALCHEMY_DATABASE_URI = 'mysql://root@localhost/musicappdb'
+SQLALCHEMY_DATABASE_URI = 'mysql://root:root@127.0.0.1/musicapp'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Flask-User settings
 USER_APP_NAME = APP_NAME
 USER_AFTER_LOGIN_ENDPOINT = 'main.dashboard'
 USER_AFTER_LOGOUT_ENDPOINT = 'main.login'
+TEMPLATES_AUTO_RELOAD=True
 
 PRESERVE_CONTEXT_ON_EXCEPTION = False
 

@@ -17,9 +17,18 @@
 		<nav class="navbar">
 			<h1><a href="{{ url_for('home.home_page') }}">Logo</a></h1>
 			<ul>
-				<li><a href="{{ url_for('auth_views.login') }}">login</a></li>
+				{% if not current_user.is_authenticated %}
+			        <li><a href="{{ url_for('auth_views.login') }}">login</a></li>
+				{% endif %}
+				{% if not current_user.is_authenticated %}
 				<li><a href="{{ url_for('auth_views.register')}}">register</a></li>
-				<li><a href="/account">Account</a></li>
+				{% endif %}
+				{% if current_user.is_authenticated %}
+				<li><a href="/account">Hi {{ current_user.username }}</a></li>
+				{% endif %}
+				{% if current_user.is_authenticated %}
+                                <li><a href="/logout">Logout</a></li>
+                                {% endif %}
 			</ul>
 		</nav>
 	</div>
@@ -35,7 +44,7 @@
 		</div>
 		{% block content %}{% endblock %}
 	<div/>
-	<script src="./static/scripts/login_script.js"></script>
+	{# <script src="./static/scripts/login_script.js"></script> #} {# this was the issue #}
 	<script src="../static/scripts/registration_script.js"></script>
 	<script src="../static/scripts/modal.js"></script>
     </body>

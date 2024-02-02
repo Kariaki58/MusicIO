@@ -1,5 +1,5 @@
 from musicapp import create_app, database
-from flask import render_template
+from flask import render_template, redirect, url_for
 from flask_login import current_user, login_required
 from musicapp.authentication import auth_views
 
@@ -15,7 +15,7 @@ def tear(self):
 @app.route('/')
 @login_required
 def index():
-    return render_template('index.html')
+    return redirect(url_for('home.home_page'))
 
 
 if __name__ == "__main__":
