@@ -36,7 +36,6 @@ def create_app():
     mail.init_app(app)
 
 
-
     app.register_blueprint(home)
 
     with app.app_context():

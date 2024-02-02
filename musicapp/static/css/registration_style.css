@@ -34,6 +34,10 @@
     padding: 0.6em;
 }
 
+.form-group input:hover {
+    background-color: #f1ecec;
+}
+
 .form-group button {
     background-color: white;
     margin-top: 2em;

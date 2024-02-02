@@ -25,18 +25,14 @@ h2 {
     color: white;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.input-group {
+.form-group {
     margin-bottom: 20px;
 }
 
 input {
     padding: 10px;
     width: 100%;
+    padding: 8px;
     box-sizing: border-box;
     border: none;
     border-radius: 1rem;

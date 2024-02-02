@@ -25,6 +25,9 @@ def post_login():
 
     login_user(user)
     
+    if request.form.get('next'):
+        return redirect(request.form.get('next'))
+    
     flash('you have successfully login', 'success')
     return redirect(url_for('home.home_page'))
 
@@ -64,7 +67,7 @@ def post_register():
 
 @auth_views.route('/reset_password', methods=['GET'])
 def reset_password():
-    return render_template('reset_password.html')
+    return render_template('reset_password.html', next=request.args.get('next'))
 
 
 @auth_views.route('/reset_password', methods=['POST'])
@@ -109,4 +112,9 @@ def post_confirm_password():
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
+
+
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    return redirect(url_for('auth_views.login', next=request.path))
 
