@@ -1,11 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+songs
+{% endblock title %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/song_list.css') }}">
+{% endblock css %}
+{% block content %}
+<div class="content">
+    {% for song in songs %}
+        <audio class="control-music" data-song-id="{{ song.id }}">
+            <source src="{{ url_for('static', filename=song.song_path) }}">
+        </audio>
+        <ul class="song_ul">
+            <li>
+                <div class="control">
+                    <p>{{ song.title }}</p>
+                    <input type="range" value="0" class="range" id="range">
+                </div>
+                <div class="icons">
+                    <div>
+                        <i class="fa-solid fa-shuffle" id="shuffle_song"></i>
+                        <i class="fa-solid fa-repeat" id="repeat"></i>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-forward-step" id="forward"></i>
+                        <i class="fa-solid fa-play" id="play-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-pause" id="pause-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-backward-step" id="back"></i>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-heart" id="heart"></i>
+                        <i class="fa-solid fa-download" id="download"></i>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    {% endfor %}
+</div>
+<script src="{{ url_for('static', filename='scripts/song_list_script.js') }}"></script>
+{% endblock %}
