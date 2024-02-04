@@ -22,7 +22,7 @@ TEMPLATES_AUTO_RELOAD=True
 
 PRESERVE_CONTEXT_ON_EXCEPTION = False
 
-UPLOAD_FOLDER = os.path.join('musicapp', 'static', 'uploads')
+UPLOAD_FOLDER = 'uploads'
 
 ALLOWED_EXTENSIONS = {'mp3', 'wav', 'ogg'}
 #Email settings

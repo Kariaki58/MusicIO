@@ -13,9 +13,9 @@ songs
         </audio>
         <ul class="song_ul">
             <li>
+                <p>{{ song.title }}</p>
                 <div class="control">
-                    <p>{{ song.title }}</p>
-                    <input type="range" value="0" class="range" id="range">
+                    <input type="range" value="0" class="range" id="range-{{ song.id }}" data-range-id="{{ song.id }}">
                 </div>
                 <div class="icons">
                     <div>

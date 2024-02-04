@@ -7,9 +7,7 @@ song = Blueprint('song', __name__)
 @song.route("/api/<playlistid>/songs")
 def show_music(playlistid):
     from musicapp.models.song import Song
-
-    # playlist_query = Playlist.query.filter(Playlist.user_id==app_user).first()
-
+    
     songs = Song.query.filter(Song.playlist_id==playlistid).all()
     song_content_with_playlist = []
     for song in songs:
