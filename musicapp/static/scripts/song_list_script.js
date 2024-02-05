@@ -10,13 +10,24 @@ function isPlaying(status) {
 
 function enablePlayMusic(id) {
     let musicElement = null;
-    musicList.forEach(musicItem => {
-        const musicId = musicItem.getAttribute("data-song-id");
-        if (musicId == id) {
-            musicElement = musicItem;
+    for (let i = 0; i < musicList.length; i++) {
+        if (i > musicList.length) {
+            i = 0;
         }
-    });
+        const musicId = musicList[i].getAttribute("data-song-id");
+        if (musicId == id) {
+            musicElement = musicList[i];
+        }
+    }
     return musicElement;
+}
+
+function nextMusicPlayer() {
+    let musicId = currentlyPlayingMusic.getAttribute('data-song-id')
+    let nextMusicId = parseInt(musicId) + 1;
+
+    music = enablePlayMusic(nextMusicId);
+    PlayMusic(music);
 }
 
 function getMusicId(id) {
@@ -24,6 +35,7 @@ function getMusicId(id) {
     let music = enablePlayMusic(musicId);
     let progressBar = document.getElementById('range-' + musicId);
 
+    
     if (/^play-\d+$/.test(id) || /^pause-\d+$/.test(id)) {
         if (/^play-\d+$/.test(id)) {
             let play = document.getElementById(id);
@@ -45,15 +57,21 @@ function getMusicId(id) {
         music.addEventListener('timeupdate', () => {
             currentlyPlayingMusic = music;
             let value = (music.currentTime / music.duration) * 100;
+            let play = document.getElementById(id);
+            let idChange = 'pause-' + musicId;
+            let pause = document.getElementById(idChange);
             progressBar.value = value;
             if (music.ended) {
-                let play = document.getElementById(id);
-                let idChange = 'pause-' + musicId;
-                let pause = document.getElementById(idChange);
+                let musicId = currentlyPlayingMusic.getAttribute('data-song-id')
+                let nextMusicId = parseInt(musicId) + 1;
 
-                progressBar.value = 0;
-                pause.style.display = "none";
+
                 play.style.display = "inline-block";
+                pause.style.display = "none"
+                console.log(nextMusicId)
+                progressBar.value = 0;
+                music = enablePlayMusic(nextMusicId);
+                PlayMusic(music);
             }
         });
     }
@@ -74,6 +92,7 @@ function getMusicId(id) {
 
 function PlayMusic(music) {
     if (currentlyPlayingMusic) {
+        console.log("yes")
         let musicId = currentlyPlayingMusic.getAttribute('data-song-id')
         let idPlay = 'play-' + musicId;
         let idPause = 'pause-' + musicId;
@@ -101,7 +120,7 @@ allIcons.forEach(icon => {
 progressBars.forEach(progressBar => {
     let musicId = progressBar.dataset.rangeId;
     let music = enablePlayMusic(musicId);
-
+    
     progressBar.addEventListener('click', function (e) {
         let clickX = e.pageX - this.offsetLeft;
         let percent = clickX / this.offsetWidth;
