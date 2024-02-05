@@ -19,18 +19,18 @@ songs
                 </div>
                 <div class="icons">
                     <div>
-                        <i class="fa-solid fa-shuffle" id="shuffle_song"></i>
-                        <i class="fa-solid fa-repeat" id="repeat"></i>
+                        <i class="fa-solid fa-shuffle" id="shuffle_song-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-repeat" id="repeat-{{ song.id }}" data-music-id="{{ song.id }}"></i>
                     </div>
                     <div>
-                        <i class="fa-solid fa-forward-step" id="forward"></i>
+                        <i class="fa-solid fa-forward-step" id="forward-{{ song.id }}" data-music-id="{{ song.id }}"></i>
                         <i class="fa-solid fa-play" id="play-{{ song.id }}" data-music-id="{{ song.id }}"></i>
                         <i class="fa-solid fa-pause" id="pause-{{ song.id }}" data-music-id="{{ song.id }}"></i>
-                        <i class="fa-solid fa-backward-step" id="back"></i>
+                        <i class="fa-solid fa-backward-step" id="back-{{ song.id }}" data-music-id="{{ song.id }}"></i>
                     </div>
                     <div>
-                        <i class="fa-solid fa-heart" id="heart"></i>
-                        <i class="fa-solid fa-download" id="download"></i>
+                        <i class="fa-solid fa-heart" id="heart-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-download" id="download-{{ song.id }}" data-music-id="{{ song.id }}"></i>
                     </div>
                 </div>
             </li>

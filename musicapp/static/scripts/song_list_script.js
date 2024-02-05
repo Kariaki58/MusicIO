@@ -4,12 +4,8 @@ const musicList = document.querySelectorAll(".control-music");
 let currentlyPlayingMusic = null;
 
 
-function isPlaying(music) {
-    console.log(music);
-    if (music) {
-        return true;
-    }
-    return false;
+function isPlaying(status) {
+    return status;
 }
 
 function enablePlayMusic(id) {
@@ -26,22 +22,22 @@ function enablePlayMusic(id) {
 function getMusicId(id) {
     let musicId = document.getElementById(id).dataset.musicId;
     let music = enablePlayMusic(musicId);
+    let progressBar = document.getElementById('range-' + musicId);
 
-    if (/^play-\d+$/.test(id) || /^pause-\d+$/.test(id))
-    {
+    if (/^play-\d+$/.test(id) || /^pause-\d+$/.test(id)) {
         if (/^play-\d+$/.test(id)) {
             let play = document.getElementById(id);
             let idChange = 'pause-' + musicId;
             let pause = document.getElementById(idChange);
+
             play.style.display = "none";
             pause.style.display = "inline-block";
-            console.log(idChange)
             PlayMusic(music);
         } else if (/^pause-\d+$/.test(id)) {
             let pause = document.getElementById(id);
             let idChange = 'play-' + musicId;
             let play = document.getElementById(idChange);
-            console.log(idChange)
+
             pause.style.display = "none";
             play.style.display = "inline-block";
             PauseMusic(music);
@@ -49,9 +45,30 @@ function getMusicId(id) {
         music.addEventListener('timeupdate', () => {
             currentlyPlayingMusic = music;
             let value = (music.currentTime / music.duration) * 100;
-            let progressBar = document.getElementById('range-' + musicId);
             progressBar.value = value;
+            if (music.ended) {
+                let play = document.getElementById(id);
+                let idChange = 'pause-' + musicId;
+                let pause = document.getElementById(idChange);
+
+                progressBar.value = 0;
+                pause.style.display = "none";
+                play.style.display = "inline-block";
+            }
         });
+    }
+    if (/^repeat-\d+$/.test(id)) {
+        music.loop = true;
+        let norepeat = document.getElementById(id);
+        norepeat.style.color = "green"
+        norepeat.addEventListener("click", () => {
+            music.loop = !music.loop;
+            if (music.loop) {
+                norepeat.style.color = "green"
+            } else {
+                norepeat.style.color = "white"
+            }
+        })
     }
 }
 
@@ -62,7 +79,6 @@ function PlayMusic(music) {
         let idPause = 'pause-' + musicId;
         let play = document.getElementById(idPlay);
         let pause = document.getElementById(idPause);
-
 
         play.style.display = "inline-block"
         pause.style.display = "none"
@@ -92,13 +108,3 @@ progressBars.forEach(progressBar => {
         music.currentTime = percent * music.duration;
     });
 });
-
-
-// for (let i = 0; i < musicList.length; i++) {
-//     musicList[i].addEventListener('timeupdate', () => {
-//         currentlyPlayingMusic = musicList[i];
-//         let value = (musicList[i].currentTime / musicList[i].duration) * 100;
-//         let progressBar = document.getElementById('range-' + musicList[i].getAttribute("data-song-id"));
-//         progressBar.value = value;
-//     });
-// }
