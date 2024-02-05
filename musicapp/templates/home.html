@@ -14,7 +14,7 @@ Home Page
                 <h1>+</h1>
             </div>
             {% for data in content_list %}
-                <div class="card">
+                <div class="card" onclick="getSongs('{{data.id}}')">
                     <i class="fa-solid fa-play" id="icon"></i>
                     <div class="text">
                         <h4>{{ data.title }}</h4>
@@ -43,6 +43,10 @@ Home Page
         </div>
     </div>
     <script>
+        function getSongs(playlistId) {
+            console.log(playlistId)
+            window.location.href = `api/${playlistId}/songs`;
+        }
         if ( window.history.replaceState ) {
             window.history.replaceState( null, null, window.location.href );
         }

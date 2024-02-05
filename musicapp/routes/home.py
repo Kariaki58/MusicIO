@@ -26,34 +26,37 @@ def handle_user_form(title, artist_name, file):
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
+        folder_parent = 'musicapp'
+        parent_child = 'static'
         try:
-            os.mkdir(app.config['UPLOAD_FOLDER'])
+            path = os.path.join(folder_parent, parent_child, app.config['UPLOAD_FOLDER'])
+            os.mkdir(path)
         except FileExistsError:
             pass
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        filepath = os.path.join(folder_parent, parent_child, app.config['UPLOAD_FOLDER'], filename)
         
         file.save(filepath)
 
         new_filename = f'{title}.mp3'
         new_filename = new_filename.replace(' ', '_')
 
-        new_filepath = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
+        new_filepath = os.path.join(folder_parent, parent_child, app.config['UPLOAD_FOLDER'], new_filename)
         os.rename(filepath, new_filepath)
         app_user = current_user.get_id()
         if app_user is None:
             return app_user
         playlist_query = Playlist.query.filter(Playlist.user_id==app_user).first()
         playlist_is_valid = playlist_query is None
+        song_path = f'{app.config["UPLOAD_FOLDER"]}/{new_filename}'
         if playlist_is_valid:
             new_playlist = Playlist(title=title, user_id=app_user)
             database.session.add(new_playlist)
-            song_path = f'{app.config["UPLOAD_FOLDER"]}/{new_filename}'
             database.session.commit()
-            new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=new_playlist.id, song_path=new_filepath)
+            new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=new_playlist.id, song_path=song_path)
             database.session.add(new_song)
             database.session.commit()
             return True
-        new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=playlist_query.id, song_path=new_filepath)
+        new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=playlist_query.id, song_path=song_path)
         database.session.add(new_song)
         database.session.commit()
         return True
@@ -71,7 +74,6 @@ def user_input_validation(title, artist_name):
 
 def query_playlist():
     from musicapp.models.playlist import Playlist
-
     content_list = []
     playlist = Playlist.query.all()
     for data in playlist:
@@ -81,7 +83,8 @@ def query_playlist():
     return content_list
 
 
-@home.route('/home', methods=['GET', 'POST'])
+@home.route('/home')
+@home.route('/', methods=['GET', 'POST'])
 def home_page():
     from musicapp.models.song import Song
 
@@ -97,4 +100,5 @@ def home_page():
         
         if handle_user_form(title, artist_name, file) is None:
             return redirect(url_for('auth_views.login'))
+        content_list = query_playlist()
     return render_template('home.html', content_list=content_list)

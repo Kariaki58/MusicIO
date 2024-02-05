@@ -13,7 +13,6 @@ def tear(self):
     database.session.remove()
 
 @app.route('/')
-@login_required
 def index():
     return redirect(url_for('home.home_page'))
 

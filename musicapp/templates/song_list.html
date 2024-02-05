@@ -1,107 +1,41 @@
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/song_list.css">
-    <title>Song playlist</title>
-</head>
-
-<body>
-
-    <h1>Music Playlist</h1>
-  
-    <ul id="playlist"></ul>
-  
-    <audio controls id="audioPlayer">
-      Your browser does not support the audio element.
-    </audio>
-  
-    <script src="../static/scripts/song_list_script.js"></script>
-  </body>
-
-</html>-->
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/song_list.css">
-    <script src="https://kit.fontawesome.com/673cfa2228.js" crossorigin="anonymous"></script>
-    <title>Song List</title>
-</head>
-<body>
-    <div class="container active">
-        <div class="top">
-            <i class="fa-solid fa-bars"></i>
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-        
-        <div class="cover-image"></div>
-        <div class="player-body"></div>
-
-        <div class="list-wrapper">
-            <table class="list" id="playlists">
-                <tr class="song">
-                    <td class="no">
-                        <h5>1</h5>
-                    </td>
-                    <td class="title">
-                        <h6>Song Title</h6>
-                    </td>
-                    <td class="length">
-                        <h5>2:03</h5>
-                    </td>
-                    <td>
-                        <i class="fa-solid fa-heart"></i>
-                    </td>
-                </tr>
-
-                <tr class="song">
-                    <td class="no">
-                        <h5>1</h5>
-                    </td>
-                    <td class="title">
-                        <h6>Song Title</h6>
-                    </td>
-                    <td class="length">
-                        <h5>2:03</h5>
-                    </td>
-                    <td>
-                    <i class="fa-regular fa-heart"></i>
-                    </td>
-                </tr>
-
-                <tr class="song">
-                    <td class="no">
-                        <h5>1</h5>
-                    </td>
-                    <td class="title">
-                        <h6>Song Title</h6>
-                    </td>
-                    <td class="length">
-                        <h5>2:03</h5>
-                    </td>
-                    <td>
-                    <i class="fa-regular fa-heart"></i>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="info">
-            <h2>Song title</h2>
-            <h3>Artist</h3>
-        </div>
-
-        <p class="current-song-title">song title</p>
-    </div>
-    
-    <script src="../static/scripts/song_list_script.js"></script>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+songs
+{% endblock title %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/song_list.css') }}">
+{% endblock css %}
+{% block content %}
+<div class="content">
+    {% for song in songs %}
+        <audio class="control-music" data-song-id="{{ song.id }}">
+            <source src="{{ url_for('static', filename=song.song_path) }}">
+        </audio>
+        <ul class="song_ul">
+            <li>
+                <p>{{ song.title }}</p>
+                <div class="control">
+                    <input type="range" value="0" class="range" id="range-{{ song.id }}" data-range-id="{{ song.id }}">
+                </div>
+                <div class="icons">
+                    <div>
+                        <i class="fa-solid fa-shuffle" id="shuffle_song-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-repeat" id="repeat-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-forward-step" id="forward-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-play" id="play-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-pause" id="pause-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-backward-step" id="back-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-heart" id="heart-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-download" id="download-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    {% endfor %}
+</div>
+<script src="{{ url_for('static', filename='scripts/song_list_script.js') }}"></script>
+{% endblock %}

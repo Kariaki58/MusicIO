@@ -7,8 +7,8 @@
 	{% block css %}
 	{% endblock %}
 	<script src="https://kit.fontawesome.com/673cfa2228.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="../static/css/navigation.css">
-	<link rel="stylesheet" href="../static/css/base.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 	<meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID">
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
@@ -16,7 +16,7 @@
 	<div class="nav-box">
 		<nav class="navbar">
 			<h1><a href="{{ url_for('home.home_page') }}">Logo</a></h1>
-			<ul>
+			<ul class="base_ul">
 				{% if not current_user.is_authenticated %}
 			        <li><a href="{{ url_for('auth_views.login') }}">login</a></li>
 				{% endif %}
@@ -43,9 +43,9 @@
 			{% endwith %}
 		</div>
 		{% block content %}{% endblock %}
-	<div/>
-	{# <script src="./static/scripts/login_script.js"></script> #} {# this was the issue #}
-	<script src="../static/scripts/registration_script.js"></script>
-	<script src="../static/scripts/modal.js"></script>
+	</div>
+	<script src="{{ url_for('static', filename='scripts/registration_script.js') }}"></script>
+	<script src="{{ url_for('static', filename='scripts/modal.js') }}"></script>
+
     </body>
 </html>

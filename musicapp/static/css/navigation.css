@@ -22,13 +22,13 @@
     padding: 1em;
 }
 
-ul {
+.base_ul {
     display: flex;
     justify-content: space-around;
     list-style-type: none;
 }
 
-ul li {
+.base_ul li {
     margin-left: 2em;
 }
 
@@ -37,7 +37,7 @@ a {
     text-decoration: none;
 }
 
-ul li a {
+.base_ul li a {
     font-size: 1.5rem;
 }
 
