@@ -28,8 +28,8 @@ ALLOWED_EXTENSIONS = {'mp3', 'wav', 'ogg'}
 #Email settings
 MAIL_SERVER='smtp.gmail.com'
 MAIL_PORT=465
-MAIL_USERNAME=''
-MAIL_PASSWORD=''
+MAIL_USERNAME='kariakichernocherno@gmail.com'
+MAIL_PASSWORD='bohu vptr xkdm llgg'
 MAIL_DEFAULT_SENDER='info@musicio.com'
 MAIL_USE_SSL=True
 MAIL_USE_TLS=False
