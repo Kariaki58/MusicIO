@@ -22,10 +22,26 @@ function enablePlayMusic(id) {
     return musicElement;
 }
 
-function nextMusicPlayer() {
+function PlayForward() {
+    nextMusicPlayer(1)
+}
+
+function PlayBack() {
+    nextMusicPlayer(-1)
+}
+
+function Download() {
+
+}
+
+function likeApi() {
+    
+}
+
+function nextMusicPlayer(next=1) {
     if (currentlyPlayingMusic) {
         let musicId = currentlyPlayingMusic.getAttribute('data-song-id');
-        let nextMusicId = parseInt(musicId) + 1;
+        let nextMusicId = parseInt(musicId) + next;
         let music = enablePlayMusic(nextMusicId);
 
         if (music) {
@@ -35,7 +51,6 @@ function nextMusicPlayer() {
                 playButton.click();
             }
         } else {
-            console.log("No next music found");
         }
     }
 }
@@ -117,7 +132,13 @@ function PauseMusic(music) {
 
 allIcons.forEach(icon => {
     icon.addEventListener("click", () => {
-        getMusicId(icon.id);
+        if (/^back-\d+$/.test(icon.id) && currentlyPlayingMusic) {
+            PlayForward();
+        } else if (/^forward-\d+$/.test(icon.id) && currentlyPlayingMusic) {
+            PlayBack();
+        } else {
+            getMusicId(icon.id);
+        }
     });
 });
 
