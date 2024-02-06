@@ -38,8 +38,9 @@ def list_playlist_songs(playlist_id):
     data = Playlist.query.filter_by(id=playlist_id).all()
 
     for playlist in data:
-        songs = playlist.songs
-        for song in songs:
+        song_objs = playlist.songs
+        for song in song_objs:
             song_dict = song.to_dict()
-            songs.append(song)
+            del song_dict['_sa_instance_state']
+            songs.append(song_dict)
     return songs, 200
