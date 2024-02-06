@@ -1,0 +1,122 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.Logo {
+    color: #fff;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+}
+
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: right;
+}
+
+header a {
+    color: black;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    align-items: center;
+}
+
+header a:hover {
+    color: #decfcf;
+
+}
+
+header div {
+    background-color: #e41b1b;
+}
+
+header div a {
+    text-align: right;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+.box {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    position: relative;
+}
+
+.playlist {
+    list-style: none;
+    padding: 0;
+}
+
+.playlist li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.playlist a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.playlist a:hover {
+    background-color: #fdfcfc;
+}
+
+.fa-play,
+.fa-heart {
+    color: #3498db;
+    padding: 5px;
+    margin-right: 20px;
+}
+
+.fa-play {
+    margin-left: auto;
+}
+
+.fa-heart, .fa-play:hover {
+    color: #e41b1b;
+}
+footer {
+    text-align: center;
+    padding: 10px;
+    color: #fff;
+    background-color: #5591eb;
+}
+
+footer a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: black;
+}
