@@ -23,12 +23,23 @@ function enablePlayMusic(id) {
 }
 
 function nextMusicPlayer() {
-    let musicId = currentlyPlayingMusic.getAttribute('data-song-id')
-    let nextMusicId = parseInt(musicId) + 1;
+    if (currentlyPlayingMusic) {
+        let musicId = currentlyPlayingMusic.getAttribute('data-song-id');
+        let nextMusicId = parseInt(musicId) + 1;
+        let music = enablePlayMusic(nextMusicId);
 
-    music = enablePlayMusic(nextMusicId);
-    PlayMusic(music);
+        if (music) {
+            console.log(music);
+            let playButton = document.getElementById('play-' + nextMusicId);
+            if (playButton) {
+                playButton.click();
+            }
+        } else {
+            console.log("No next music found");
+        }
+    }
 }
+
 
 function getMusicId(id) {
     let musicId = document.getElementById(id).dataset.musicId;
@@ -62,16 +73,10 @@ function getMusicId(id) {
             let pause = document.getElementById(idChange);
             progressBar.value = value;
             if (music.ended) {
-                let musicId = currentlyPlayingMusic.getAttribute('data-song-id')
-                let nextMusicId = parseInt(musicId) + 1;
-
-
                 play.style.display = "inline-block";
                 pause.style.display = "none"
-                console.log(nextMusicId)
                 progressBar.value = 0;
-                music = enablePlayMusic(nextMusicId);
-                PlayMusic(music);
+                nextMusicPlayer();
             }
         });
     }
@@ -92,7 +97,6 @@ function getMusicId(id) {
 
 function PlayMusic(music) {
     if (currentlyPlayingMusic) {
-        console.log("yes")
         let musicId = currentlyPlayingMusic.getAttribute('data-song-id')
         let idPlay = 'play-' + musicId;
         let idPause = 'pause-' + musicId;
