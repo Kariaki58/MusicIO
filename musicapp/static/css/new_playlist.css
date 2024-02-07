@@ -28,27 +28,21 @@ h1 {
 }
 
 .playlist li {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
     border-bottom: 1px solid #ddd;
+    padding: 1em;
 }
 
-.playlist a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s ease;
+.playlist li a {
+    color: blue;
+    text-decoration: underline;
 }
-
-ul li:nth-child(even) {
+.playlist li:nth-child(even) {
     background-color: #d6d3d3;
 }
 
-.box a:hover {
-    background-color: #b7b5b5;
-}
 
 .fa-play,
 .fa-heart {
@@ -61,10 +55,14 @@ ul li:nth-child(even) {
     margin-left: auto;
 }
 
-.fa-play:hover {
+/* song list styles */
+.song_ul {
+    display: none;
+}
+/* .fa-play:hover {
     color: #e41b1b;
 }
 
 .fa-heart:hover {
     color: #e41b1b;
-}
+} */

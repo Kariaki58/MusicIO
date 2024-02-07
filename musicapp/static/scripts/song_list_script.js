@@ -4,10 +4,6 @@ const musicList = document.querySelectorAll(".control-music");
 let currentlyPlayingMusic = null;
 
 
-function isPlaying(status) {
-    return status;
-}
-
 function enablePlayMusic(id) {
     let musicElement = null;
     for (let i = 0; i < musicList.length; i++) {
