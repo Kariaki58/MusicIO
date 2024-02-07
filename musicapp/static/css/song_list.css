@@ -9,11 +9,9 @@
 }
 
 .song_ul {
-    margin: 20px;
-    max-width: 800px;
-    background-color: indigo;
+    width: 100%;
+    background-color: rgb(84, 84, 99);
     padding: 0.5em;
-    border-radius: 0.5rem;
 }
 
 .control {

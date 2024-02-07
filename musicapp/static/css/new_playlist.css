@@ -2,6 +2,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 
 .container {
@@ -18,7 +19,6 @@ h1 {
 .box {
     padding: 20px;
     margin-top: 20px;
-    border-radius: 8px;
     position: relative;
 }
 
@@ -55,14 +55,48 @@ h1 {
     margin-left: auto;
 }
 
-/* song list styles */
-.song_ul {
-    display: none;
-}
-/* .fa-play:hover {
-    color: #e41b1b;
+.display_ul {
+    list-style: none;
 }
 
-.fa-heart:hover {
-    color: #e41b1b;
-} */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+  
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    text-transform: lowercase;
+    font-size: 10px;
+    visibility: visible;
+    opacity: 1;
+}
+
+.song_ul {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+}
