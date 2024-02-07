@@ -202,6 +202,8 @@ window.onload = function() {
     }
     music = enablePlayMusic(retrievedDictionary["currentlyPlayingMusic"])
     music.currentTime = retrievedDictionary['songrangepos']
+    let value = (music.currentTime / music.duration) * 100;
+    progressBar.value = value
 }
 
 window.onbeforeunload = function() {
