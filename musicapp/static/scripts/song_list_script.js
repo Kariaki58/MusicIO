@@ -4,10 +4,6 @@ const musicList = document.querySelectorAll(".control-music");
 let currentlyPlayingMusic = null;
 
 
-function isPlaying(status) {
-    return status;
-}
-
 function enablePlayMusic(id) {
     let musicElement = null;
     for (let i = 0; i < musicList.length; i++) {
@@ -22,13 +18,39 @@ function enablePlayMusic(id) {
     return musicElement;
 }
 
-function nextMusicPlayer() {
-    let musicId = currentlyPlayingMusic.getAttribute('data-song-id')
-    let nextMusicId = parseInt(musicId) + 1;
-
-    music = enablePlayMusic(nextMusicId);
-    PlayMusic(music);
+function PlayForward() {
+    nextMusicPlayer(1)
 }
+
+function PlayBack() {
+    nextMusicPlayer(-1)
+}
+
+function Download() {
+
+}
+
+function likeApi() {
+    
+}
+
+function nextMusicPlayer(next=1) {
+    if (currentlyPlayingMusic) {
+        let musicId = currentlyPlayingMusic.getAttribute('data-song-id');
+        let nextMusicId = parseInt(musicId) + next;
+        let music = enablePlayMusic(nextMusicId);
+
+        if (music) {
+            console.log(music);
+            let playButton = document.getElementById('play-' + nextMusicId);
+            if (playButton) {
+                playButton.click();
+            }
+        } else {
+        }
+    }
+}
+
 
 function getMusicId(id) {
     let musicId = document.getElementById(id).dataset.musicId;
@@ -62,16 +84,10 @@ function getMusicId(id) {
             let pause = document.getElementById(idChange);
             progressBar.value = value;
             if (music.ended) {
-                let musicId = currentlyPlayingMusic.getAttribute('data-song-id')
-                let nextMusicId = parseInt(musicId) + 1;
-
-
                 play.style.display = "inline-block";
                 pause.style.display = "none"
-                console.log(nextMusicId)
                 progressBar.value = 0;
-                music = enablePlayMusic(nextMusicId);
-                PlayMusic(music);
+                nextMusicPlayer();
             }
         });
     }
@@ -92,7 +108,6 @@ function getMusicId(id) {
 
 function PlayMusic(music) {
     if (currentlyPlayingMusic) {
-        console.log("yes")
         let musicId = currentlyPlayingMusic.getAttribute('data-song-id')
         let idPlay = 'play-' + musicId;
         let idPause = 'pause-' + musicId;
@@ -113,7 +128,13 @@ function PauseMusic(music) {
 
 allIcons.forEach(icon => {
     icon.addEventListener("click", () => {
-        getMusicId(icon.id);
+        if (/^back-\d+$/.test(icon.id) && currentlyPlayingMusic) {
+            PlayForward();
+        } else if (/^forward-\d+$/.test(icon.id) && currentlyPlayingMusic) {
+            PlayBack();
+        } else {
+            getMusicId(icon.id);
+        }
     });
 });
 

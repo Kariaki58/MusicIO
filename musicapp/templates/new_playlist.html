@@ -1,34 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/css/new_playlist.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/ab1f2130e0.js" crossorigin="anonymous"></script>
-    <title>Document</title>
-</head>
-<body>
-    
-    <div class="container">
-        <h1>Songs</h1>
-
-        <div class="box">
+{% extends 'base.html' %}
+{% block title %}
+songs
+{% endblock title %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/new_playlist.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/song_list.css' ) }}">
+{% endblock css %}
+{% block content %}
+<div class="container">
+    <h1>Songs</h1>
+    <div class="box">
+        {% for song in songs %}
             <ul class="playlist">
-                <li><a href="#">Unstoppable<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="#">Broken<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="#">Hello<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="#">Best Friend<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="#">Angel<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="#">Rise Up<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="#">Brave<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="#">Unstoppable<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="#">Broken<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="#">Hello<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-                <li><a href="#">Best Friend<i class="fa-solid fa-play"></i><i class="fa-regular fa-heart"></i></a></li>
-
+                <audio class="control-music" data-song-id="{{ song.id }}">
+                    <source src="{{ url_for('static', filename=song.song_path) }}">
+                </audio>
+                <li>
+                    <div>
+                        <p class="music">{{ song.title }}</p>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-play i" id="play-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-pause i" id="pause-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-regular fa-heart i" id="heart-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-heart i hide" id="heart-x-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <span class="tooltip">
+                            <i class="fa-regular fa-star tooltip">
+                                <span class="tooltiptext">add to favorite</span>
+                            </i>
+                        </span>
+                        <span class="tooltip">
+                            <i class="fa-solid fa-star tooltip hide">
+                                <span class="tooltiptext">remove from favorite</span>
+                            </i>
+                        </span>
+                    </div>
+                </li>
             </ul>
-        </div>
+        {% endfor %}
     </div>
-
-</body>
-</html>
+</div>
+<div class="song_ul" id="song">
+    <ul class="display_ul">
+        <li>
+            <p role="title" id="title"></p>
+            <div class="control">
+                <input type="range" value="0" class="range" id="range">
+            </div>
+            <div class="icons">
+                <div>
+                    <i class="fa-solid fa-shuffle other" id="shuffle_song"></i>
+                    <i class="fa-solid fa-repeat other" id="repeat"></i>
+                </div>
+                <div>
+                    <i class="fa-solid fa-forward-step other" id="forward"></i>
+                    <i class="fa-solid fa-play other" id="play"></i>
+                    <i class="fa-solid fa-pause other" id="pause"></i>
+                    <i class="fa-solid fa-backward-step other" id="back"></i>
+                </div>
+                <div>
+                    <i class="fa-regular fa-heart other"></i>
+                    <i class="fa-solid fa-heart other hide" id="heart"></i>
+                    <i class="fa-solid fa-download other" id="download"></i>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="module" src="{{ url_for('static', filename='scripts/new_playlist.js') }}"></script>
+{% endblock %}
