@@ -92,9 +92,7 @@ function repeatPlay() {
 
 function getMusicId(id) {
     let musicId = document.getElementById(id).dataset.musicId;
-    
     music = enablePlayMusic(musicId);
-    
     if (/^play-\d+$/.test(id) || /^pause-\d+$/.test(id)) {
         if (/^play-\d+$/.test(id)) {
             let playId = document.getElementById(id);
@@ -120,10 +118,12 @@ function getMusicId(id) {
         }
         music.addEventListener('timeupdate', () => {
             currentlyPlayingMusic = music;
-            let value = (music.currentTime / music.duration) * 100;
+            
             let play = document.getElementById(id);
             let idChange = 'pause-' + musicId;
             let pause = document.getElementById(idChange);
+            let value = (music.currentTime / music.duration) * 100;
+            
             progressBar.value = value;
             if (music.ended) {
                 play.style.display = "inline-block";
@@ -133,15 +133,29 @@ function getMusicId(id) {
             }
         });
     }
+    if (/^heart-\d+$/.test(id)) {
+        let likeId = document.getElementById(id);
+        let idChange = 'heart-x-' + musicId
+        let heartSolid = document.getElementById(idChange)
+        likeId.style.display = 'none'
+        heartSolid.style.display = 'inline-block'
+    } else if (/^heart-x-\d+$/.test(id)) {
+        let likeId = document.getElementById(id);
+        let idChange = 'heart-' + musicId
+        let heartSolid = document.getElementById(idChange)
+        likeId.style.display = 'none'
+        heartSolid.style.display = 'inline-block'
+    }
 }
 
 function PlayMusic(music) {
     let musicId = getMusicAttributeId(music);
     if (currentlyPlayingMusic) {
         let currentMusicId = currentlyPlayingMusic.getAttribute('data-song-id');
-        if (musicId == currentMusicId) {            
+        if (musicId == currentMusicId) {
             music.play();
         } else {
+            currentlyPlayingMusic.pause()
             let musicId = currentlyPlayingMusic.getAttribute('data-song-id')
             let idPlay = 'play-' + musicId;
             let idPause = 'pause-' + musicId;
@@ -178,3 +192,27 @@ pause.addEventListener('click', onClickPause)
 repeat.addEventListener('click', repeatPlay);
 forward.addEventListener('click', PlayBack);
 back.addEventListener('click', PlayForward);
+
+window.onload = function() {
+    let retrievedJsonString = localStorage.getItem('key');
+    let retrievedDictionary = JSON.parse(retrievedJsonString);
+
+    if (retrievedDictionary["songUl"]) {
+        songUl.style.display = "block"
+    }
+    music = enablePlayMusic(retrievedDictionary["currentlyPlayingMusic"])
+    music.currentTime = retrievedDictionary['songrangepos']
+}
+
+window.onbeforeunload = function() {
+    let block = 0;
+    let repeatIcon = false;
+    if (songUl.style.display == "block") {
+        block = 1
+    }
+    if (repeat.style.color == "green") {
+        repeatIcon = true;
+    }
+    let dictionary = {"songUl": block, "currSong": 1, "songrangepos": music.currentTime, repeat: repeatIcon, "currentlyPlayingMusic": music.getAttribute('data-song-id')}
+    localStorage.setItem("key", JSON.stringify(dictionary))
+}

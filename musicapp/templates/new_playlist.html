@@ -22,15 +22,15 @@ songs
                     <div>
                         <i class="fa-solid fa-play i" id="play-{{ song.id }}" data-music-id="{{ song.id }}"></i>
                         <i class="fa-solid fa-pause i" id="pause-{{ song.id }}" data-music-id="{{ song.id }}"></i>
-                        <i class="fa-regular fa-heart i"></i>
-                        <i class="fa-solid fa-heart i" id="heart"></i>
+                        <i class="fa-regular fa-heart i" id="heart-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-heart i hide" id="heart-x-{{ song.id }}" data-music-id="{{ song.id }}"></i>
                         <span class="tooltip">
                             <i class="fa-regular fa-star tooltip">
                                 <span class="tooltiptext">add to favorite</span>
                             </i>
                         </span>
                         <span class="tooltip">
-                            <i class="fa-solid fa-star tooltip">
+                            <i class="fa-solid fa-star tooltip hide">
                                 <span class="tooltiptext">remove from favorite</span>
                             </i>
                         </span>
@@ -60,7 +60,7 @@ songs
                 </div>
                 <div>
                     <i class="fa-regular fa-heart other"></i>
-                    <i class="fa-solid fa-heart other" id="heart"></i>
+                    <i class="fa-solid fa-heart other hide" id="heart"></i>
                     <i class="fa-solid fa-download other" id="download"></i>
                 </div>
             </div>

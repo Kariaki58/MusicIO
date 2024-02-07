@@ -64,6 +64,12 @@ h1 {
     display: inline-block;
     cursor: pointer;
 }
+li .hide {
+    display: none;
+}
+.tooltip .hide {
+    display: none;
+}
   
 .tooltip .tooltiptext {
     visibility: hidden;
