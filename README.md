@@ -27,6 +27,13 @@ you have to install the following packages to run the program from your terminal
 
 ```
 >> git clone <repo>
+>> cs MusicIo
 >> python3 -m musicapp.run
 localhost running.
 ```
+
+To be able to send email, you need to create a password from google and add it to the settings file.
+### Bugs
+
+Currently fixing some issues
+you can only play music after click on a particular playlist.
