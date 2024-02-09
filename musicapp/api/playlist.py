@@ -20,7 +20,7 @@ def list_playlists():
     page_size = request.args.get('page_size', 1)
     query = Playlist.query
     query.limit(page_size)
-    query.offset(page_size * page)
+    query.offset(int(page_size) * int(page))
     playlists = query.all()
 
     for playlist in playlists:
