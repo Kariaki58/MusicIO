@@ -1,0 +1,1 @@
+### This folder houses API endpoints usable by this application from the frontend. The API could not be its own app because it only contains a small number API endpoints needed by the frontend javascript.

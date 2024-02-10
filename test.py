@@ -11,14 +11,14 @@ from musicapp.run import app
 
 
 if  app:
-    user = User(email="jjj@gmaddskl.c", password="1323", username="cory")
+    user = User(email="jjj@gmaddskl.com", password="1323", username="cory123")
 
-    song = Song(title="fire masnxxy", artist_name="asndrew tate v2", song_path="~/home/dirfd", user=user)
+    song = Song(title="Calm down", artist_name="Rema", song_path="~/home/dirfds", user=user)
     user_q = User.query.all()
 
     print(user_q)
-    comment = Comment(text="hey i hate you favour", user=user, song=song)
-    playlist = Playlist(title="My best music", user=user, songs=song)
+    comment = Comment(text="Best afro", user=user, song=song)
+    playlist = Playlist(title="Afro", user=user, songs=[song])
 
     database.session.add(user)
     database.session.add(song)

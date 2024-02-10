@@ -14,4 +14,5 @@ class Song(BaseModel, database.Model):
     playlist_id = database.Column(database.Integer, database.ForeignKey('playlists.id', ondelete='CASCADE'), nullable=False)
     favourites = database.relationship('Favourite', backref='songs', passive_deletes=True)
     comments = database.relationship('Comment', backref="song", passive_deletes=True)
+    playlists = database.relationship('Playlist', secondary = 'playlist_songs', back_populates = 'songs')
     likes = database.relationship('Like', backref='songs', passive_deletes=True)
