@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.space {
+    margin-top: 6em;
+}
+
+.nav-box {
+    position: relative;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(52, 41, 56);
+    padding: 1em;
+    z-index: 99999999999;
+}
+
+.base_ul {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+.base_ul li {
+    margin-left: 2em;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.base_ul li a {
+    font-size: 1.5rem;
+}
+
+h1 {
+    font-size: 2rem;
+}

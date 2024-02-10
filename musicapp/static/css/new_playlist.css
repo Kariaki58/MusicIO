@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto auto;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+.box {
+    padding: 20px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.playlist {
+    list-style: none;
+    padding: 0;
+}
+
+.playlist li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding: 1em;
+}
+
+.playlist li a {
+    color: blue;
+    text-decoration: underline;
+}
+.playlist li:nth-child(even) {
+    background-color: #d6d3d3;
+}
+
+
+.fa-play,
+.fa-heart {
+    color: #3498db;
+    padding: 5px;
+    margin-right: 20px;
+}
+
+.fa-play {
+    margin-left: auto;
+}
+
+.display_ul {
+    list-style: none;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+li .hide {
+    display: none;
+}
+.tooltip .hide {
+    display: none;
+}
+  
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    text-transform: lowercase;
+    font-size: 10px;
+    visibility: visible;
+    opacity: 1;
+}
+
+.song_ul {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+}

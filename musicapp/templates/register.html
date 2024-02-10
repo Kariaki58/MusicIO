@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Registration Form{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="../static/css/registration_style.css">
+{% endblock css %}
+{% block content %}
+   <div class="form-container">
+        <h2>Create an Account</h2>
+        <form action="#" method="post">
+            
+            <div class="form-group">
+                <input type="email" id="registerEmail" placeholder="Enter email address" name="email" required>
+            </div>
+	        <div class="form-group">
+                <input type="text" id="registerUsername" placeholder="Enter username" name="username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Enter password" id="registerPassword" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password_confirm" placeholder="Retype password" id="retypePassword" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+            <!-- <div class="form-group">
+                <div class="g-signin2" data-onsuccess="onGoogleSignIn"></div>
+            </div> -->
+            <div class="switch">
+                <p>Already have an account? <a href="/login" class="a-tag">Login here</a></p>
+            </div>
+        </form>
+    </div>
+{% endblock %}

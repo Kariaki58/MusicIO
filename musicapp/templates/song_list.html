@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+songs
+{% endblock title %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/song_list.css') }}">
+{% endblock css %}
+{% block content %}
+<div class="content">
+    {% for song in songs %}
+        <audio class="control-music" data-song-id="{{ song.id }}">
+            <source src="{{ url_for('static', filename=song.song_path) }}">
+        </audio>
+        <ul class="song_ul">
+            <li>
+                <p>{{ song.title }}</p>
+                <div class="control">
+                    <input type="range" value="0" class="range" id="range-{{ song.id }}" data-range-id="{{ song.id }}">
+                </div>
+                <div class="icons">
+                    <div>
+                        <i class="fa-solid fa-shuffle" id="shuffle_song-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-repeat" id="repeat-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-forward-step" id="forward-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-play" id="play-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-pause" id="pause-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-backward-step" id="back-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-heart" id="heart-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        <i class="fa-solid fa-download" id="download-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    {% endfor %}
+</div>
+<script src="{{ url_for('static', filename='scripts/song_list_script.js') }}"></script>
+{% endblock %}

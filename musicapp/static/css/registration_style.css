@@ -1,0 +1,68 @@
+
+
+.form-container {
+    margin: auto auto;
+    max-width: 500px;
+    padding: 2em;
+    border-radius: 8px;
+    text-align: center;
+    background-color: rgb(39, 34, 39); /* can change color if you wish */
+}
+
+.form-container h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+.form-container h5 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group input {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 1rem;
+    outline: none;
+    font-size: 1.3em;
+    padding: 0.6em;
+}
+
+.form-group input:hover {
+    background-color: #f1ecec;
+}
+
+.form-group button {
+    background-color: white;
+    margin-top: 2em;
+    width: 80%;
+    padding: 1em;
+    color: gray;
+    outline: none;
+    border: none;
+    border-radius: 1rem;
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button:hover {
+    color: white;
+    background-color: darkorchid;
+}
+
+.switch p {
+    text-align: center;
+    margin-top: 1em;
+    color: white;
+}
+
+.a-tag {
+    color: blue;
+}

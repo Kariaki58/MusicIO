@@ -1,0 +1,57 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.song_ul {
+    list-style-type: none;
+}
+
+.song_ul {
+    width: 100%;
+    background-color: rgb(84, 84, 99);
+    padding: 0.5em;
+}
+
+.control {
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    margin: 0.8em;
+    width: 100%;
+}
+audio {
+    width: 40%;
+}
+
+div i {
+    color: white;
+    font-size: 1.5rem;
+    fill: none;
+}
+
+
+.icons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.fa-repeat {
+    margin-left: 1em;
+}
+
+.fa-pause, .fa-play {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+i[id*='pause'] {
+    display: none;
+}
+
+.fa-download {
+    margin-left: 1em;
+}
