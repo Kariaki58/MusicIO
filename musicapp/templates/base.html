@@ -42,10 +42,10 @@
 				</div>
 			{% endwith %}
 		</div>
-		{% block content %}{% endblock %}
 	</div>
+	{% block content %}{% endblock %}
+	<script type="module" src="{{ url_for('static', filename='scripts/new_playlist.js') }}"></script>
 	<script src="{{ url_for('static', filename='scripts/registration_script.js') }}"></script>
 	<script src="{{ url_for('static', filename='scripts/modal.js') }}"></script>
-
     </body>
 </html>
