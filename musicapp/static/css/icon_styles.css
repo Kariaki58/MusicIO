@@ -1,0 +1,9 @@
+/* for icon styling */
+#icon {
+    position: absolute;
+    color: darkgrey;
+    font-size: 5rem;
+    top: 40%;
+    left: 10%;
+    transform: translate(90%, -50%);
+}

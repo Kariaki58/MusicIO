@@ -4,14 +4,13 @@ from sqlalchemy.ext.declarative import declared_attr
 
 
 class BaseModel:
-   # __abstract__ = True
     id = database.Column(database.Integer, primary_key=True)
     created_at = database.Column(database.DateTime(timezone=True), default=func.now())
     updated_at = database.Column(database.DateTime(timezone=True), default=func.now(), nullable=False)
 
 
     def __str__(self):
-        return self.__dict__
+        return f'{self.__dict__}'
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of the instance"""

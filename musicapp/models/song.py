@@ -7,10 +7,11 @@ class Song(BaseModel, database.Model):
     """
     user songs uploads
     """
-    title = database.Column(database.String(255), nullable=False)
-    artist_name = database.Column(database.String(120), nullable=False, unique=True)
+    title = database.Column(database.String(255), nullable=False, unique=True)
+    artist_name = database.Column(database.String(120), nullable=False)
     song_path = database.Column(database.String(255), nullable=False)
     user_id = database.Column(database.Integer, database.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    playlist_id = database.Column(database.Integer, database.ForeignKey('playlists.id', ondelete='CASCADE'), nullable=False)
     favourites = database.relationship('Favourite', backref='songs', passive_deletes=True)
     comments = database.relationship('Comment', backref="song", passive_deletes=True)
     playlists = database.relationship('Playlist', secondary = 'playlist_songs', back_populates = 'songs')
