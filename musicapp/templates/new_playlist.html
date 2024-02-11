@@ -24,6 +24,9 @@ songs
                         <i class="fa-solid fa-pause i" id="pause-{{ song.id }}" data-music-id="{{ song.id }}"></i>
                         <i class="fa-regular fa-heart i" id="heart-{{ song.id }}" data-music-id="{{ song.id }}"></i>
                         <i class="fa-solid fa-heart i hide" id="heart-x-{{ song.id }}" data-music-id="{{ song.id }}"></i>
+                        {% if song.user_id == curr_user %}
+                            <i class="fa-solid fa-trash-can" id="trash-{{ song.id }}" onclick="deleteSong('{{ song.id }}')"></i>
+                        {% endif %}
                         <span class="tooltip">
                             <i class="fa-regular fa-star tooltip">
                                 <span class="tooltiptext">add to favorite</span>
@@ -68,4 +71,5 @@ songs
     </ul>
 </div>
 <script type="module" src="{{ url_for('static', filename='scripts/new_playlist.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/api.js') }}"></script>
 {% endblock %}

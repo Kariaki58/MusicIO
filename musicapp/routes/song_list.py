@@ -1,4 +1,5 @@
-from flask import Flask, redirect, render_template, Blueprint, url_for
+from flask import Flask, redirect, render_template, Blueprint, url_for, jsonify
+from flask_login import current_user
 
 
 song = Blueprint('song', __name__)
@@ -11,13 +12,9 @@ def show_music(playlistid):
     songs = Song.query.filter(Song.playlist_id==playlistid).all()
     song_content_with_playlist = []
     for song in songs:
-        song_content_with_playlist.append(song)
+        song_dict = song.to_dict()
+        song_dict.pop('_sa_instance_state')
+        song_content_with_playlist.append(song_dict)
     #may use song_list.html
-    return render_template("new_playlist.html", songs=song_content_with_playlist)
-
-
-# @song.route("/api/<playlistid>/songs/<songid>")
-# def show_current_song(playlistid, songid):
-#     from musicapp.models.song import Song
-#     songs = Song.query.filter(Song.id==songid).all()
-#     return render_template("song_list.html", songs=songs)
+    print(song_content_with_playlist)
+    return render_template("new_playlist.html", songs=song_content_with_playlist, curr_user=current_user.id)
