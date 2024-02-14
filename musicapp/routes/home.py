@@ -49,14 +49,14 @@ def handle_user_form(title, artist_name, file):
         playlist_is_valid = playlist_query is None
         song_path = f'{app.config["UPLOAD_FOLDER"]}/{new_filename}'
         if playlist_is_valid:
-            new_playlist = Playlist(title=title, user_id=app_user)
+            new_playlist = Playlist(title=title, artist_name=artist_name, user_id=app_user)
             database.session.add(new_playlist)
             database.session.commit()
-            new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=new_playlist.id, song_path=song_path)
+            new_song = Song(title=title, user_id=app_user, playlist_id=new_playlist.id, song_path=song_path)
             database.session.add(new_song)
             database.session.commit()
             return True
-        new_song = Song(title=title, artist_name=artist_name, user_id=app_user, playlist_id=playlist_query.id, song_path=song_path)
+        new_song = Song(title=title, user_id=app_user, playlist_id=playlist_query.id, song_path=song_path)
         database.session.add(new_song)
         database.session.commit()
         return True
