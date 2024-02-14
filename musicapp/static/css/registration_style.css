@@ -1,12 +1,10 @@
-
-
 .form-container {
-    margin: auto auto;
+    margin: 80px auto auto;
     max-width: 500px;
     padding: 2em;
     border-radius: 8px;
     text-align: center;
-    background-color: rgb(39, 34, 39); /* can change color if you wish */
+    background-color: rgb(39, 34, 39);
 }
 
 .form-container h2 {
@@ -38,7 +36,7 @@
     background-color: #f1ecec;
 }
 
-.form-group button {
+.form-group #submit {
     background-color: white;
     margin-top: 2em;
     width: 80%;
@@ -52,7 +50,8 @@
     font-size: 18px;
 }
 
-button:hover {
+#submit:hover {
+    cursor: pointer;
     color: white;
     background-color: darkorchid;
 }

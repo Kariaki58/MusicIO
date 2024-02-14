@@ -11,7 +11,6 @@ function deleteSong(id) {
     .then(data => {
         location.reload()
         alert("deleted successfully")
-
     })
     .catch(error => {
         console.error('Error deleting song:', error);

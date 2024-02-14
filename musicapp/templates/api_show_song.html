@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://kit.fontawesome.com/673cfa2228.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/new_playlist.css">
+    <link rel="stylesheet" href="../static/css/navigation.css">
+	<link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/song_list.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="nav-box">
+		<nav class="navbar">
+			<h1 onclick="goHome()">Logo</h1>
+			<ul class="base_ul" id="base_ul">
+			</ul>
+		</nav>
+	</div>
+    <div class="container">
+        <h1>Songs</h1>
+        <div id="box">
+        </div>
+    </div>
+    <div class="song_ul" id="song">
+        <ul class="display_ul">
+            <li>
+                <p role="title" id="title"></p>
+                <div class="control">
+                    <input type="range" value="0" class="range" id="range">
+                </div>
+                <div class="icons">
+                    <div>
+                        <i class="fa-solid fa-shuffle other" id="shuffle_song"></i>
+                        <i class="fa-solid fa-repeat other" id="repeat"></i>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-forward-step other" id="forward"></i>
+                        <i class="fa-solid fa-play other" id="play"></i>
+                        <i class="fa-solid fa-pause other" id="pause"></i>
+                        <i class="fa-solid fa-backward-step other" id="back"></i>
+                    </div>
+                    <div>
+                        <i class="fa-regular fa-heart other"></i>
+                        <i class="fa-solid fa-heart other hide" id="heart"></i>
+                        <i class="fa-solid fa-download other" id="download"></i>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script src="../static/scripts/api_song_list_script.js"></script>
+    <script src="../static/scripts/api.js"></script>
+    <script src="../static/scripts/api_home.js"></script>
+</body>
+</html>

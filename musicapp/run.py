@@ -1,12 +1,14 @@
 from musicapp import create_app, database
 from flask import render_template, redirect, url_for
 from flask_login import current_user, login_required
-from musicapp.authentication import auth_views
+from flask_cors import CORS
 from musicapp.my_api import my_api_views
 
 app = create_app()
+CORS(app)
+
+
 app.url_map.strict_slashes = False
-app.register_blueprint(auth_views)
 app.register_blueprint(my_api_views)
 
 @app.teardown_appcontext
@@ -17,6 +19,7 @@ def tear(self):
 @app.route('/')
 def index():
     return redirect(url_for('home.home_page'))
+
 
 
 if __name__ == "__main__":

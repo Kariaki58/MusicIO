@@ -29,8 +29,8 @@ ALLOWED_EXTENSIONS = {'mp3', 'wav', 'ogg'}
 MAIL_SERVER='smtp.gmail.com'
 MAIL_PORT=465
 MAIL_USERNAME='kariakichernocherno@gmail.com'
-MAIL_PASSWORD='bohu vptr xkdm llgg'
+MAIL_PASSWORD=''
 MAIL_DEFAULT_SENDER='info@musicio.com'
 MAIL_USE_SSL=True
 MAIL_USE_TLS=False
-RESET_TEMPLATE= '<p>Dear {}</p></br></br> You have requested to reset your password, Please click the  link to reset your password <a href="{}">Reset</a></br></br> <p>if you didn\'t request to reset your password, please ignore this email</p>' 
+RESET_TEMPLATE= '<p>Dear {}</p></br></br> You have requested to reset your password, Please click the  link to reset your password <a href="http://127.0.0.1:5500/musicapp/templates/api_new_password.html?token={}">Reset</a></br></br> <p>if you didn\'t request to reset your password, please ignore this email</p>' 
