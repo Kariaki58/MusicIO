@@ -21,7 +21,6 @@ def index():
     return redirect(url_for('home.home_page'))
 
 
-
 if __name__ == "__main__":
     app.app_context().push()
     app.run(debug=True)

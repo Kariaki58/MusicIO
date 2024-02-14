@@ -1,6 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const playlistId = urlParams.get('playlistId');
 
+let currentUser = JSON.parse(localStorage.getItem('current_user'))
 
 fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
     method: 'GET'
@@ -8,7 +9,11 @@ fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
 .then(res => res.json())
 .then(data => {
     data.forEach(element => {
-        createElement(element.id, element.playlist_id, element.song_path, element.title)
+        if (currentUser['id'] == element.user_id) {
+            createElement(element.id, element.playlist_id, element.song_path, element.title, 'inline-block')
+        } else {
+            createElement(element.id, element.playlist_id, element.song_path, element.title, 'none')
+        }
     });
     let progressBar = document.getElementById("range")
     let shuffle_song = document.getElementById("shuffle_song")
@@ -26,8 +31,7 @@ fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
     let currentlyPlayingMusic = null;
     let audioElement = null;
     let music = null;
-
-
+    
     function enablePlayMusic(id) {
         let musicElement = null;
         for (let i = 0; i < musicList.length; i++) {
@@ -204,13 +208,12 @@ fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
     repeat.addEventListener('click', repeatPlay);
     forward.addEventListener('click', PlayBack);
     back.addEventListener('click', PlayForward);
-
 })
 .catch(err => {
     console.log(err)
 })
 
-function createElement(id, playlist_id, song_path, song_title) {
+function createElement(id, playlist_id, song_path, song_title, display) {
     let box = document.getElementById('box')
 
     let playlist = document.createElement('ul');
@@ -261,10 +264,11 @@ function createElement(id, playlist_id, song_path, song_title) {
 
 
     let trashIcon = document.createElement('i');
-    trashIcon.classList.add('fa-solid', 'fa-trash-can', 'i');
+    trashIcon.classList.add('fa-solid', 'fa-trash-can', 'i', 'show');
     // ************************verify user on delete**************************
     trashIcon.setAttribute('id', `trash-${id}`);
-    // trashIcon.setAttribute('onclick', "deleteSong('')");
+    trashIcon.style.display = display
+    trashIcon.setAttribute("onClick", `deleteSong(${id})`);
 
     let tooltip1 = document.createElement('span');
     tooltip1.classList.add('tooltip');

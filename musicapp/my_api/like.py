@@ -1,10 +1,10 @@
 # from musicapp import database
 # from musicapp.models.like import Like
 # from flask import jsonify, make_response, request
-# from musicapp.api import api_views
+# from musicapp.my_api import my_api_views
 
 
-# @api_views.route('/like', methods=['POST'])
+# @my_api_views.route('/like', methods=['POST'])
 # def like_a_song():
 #     """API endpoint to like a song"""
 #     try:

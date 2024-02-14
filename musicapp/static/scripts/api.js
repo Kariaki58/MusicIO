@@ -1,6 +1,7 @@
 function deleteSong(id) {
-    fetch(`http://127.0.0.1:5000/api/2/songs/${id}`, {
-        method: 'DELETE',
+    let intId = parseInt(id)
+    fetch(`http://127.0.0.1:5000/playlists/songs/${intId}`, {
+        method: 'POST',
     })
     .then(response => {
         if (!response.ok) {
@@ -9,8 +10,8 @@ function deleteSong(id) {
         return response.json();
     })
     .then(data => {
+        alert(data.message)
         location.reload()
-        alert("deleted successfully")
     })
     .catch(error => {
         console.error('Error deleting song:', error);
