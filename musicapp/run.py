@@ -19,6 +19,11 @@ def index():
     return redirect(url_for('home.home_page'))
 
 
+@app.route('/landing')
+def landing():
+    return render_template('landing.html')
+
+
 if __name__ == "__main__":
     app.app_context().push()
     app.run(debug=True)
