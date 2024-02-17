@@ -13,9 +13,9 @@ def like_song(id):
 
     song = Song.query.filter_by(id=id).first()
     like = Like.query.filter_by(user_id=current_user, song_id=id).first()
-
+    
     if not song:
-        return jsonify({'error': 'Post don\'t exist'}, 404)
+        return jsonify({'error': 'song don\'t exist'}, 404)
     elif like:
         database.session.delete(like)
         database.session.commit()

@@ -14,14 +14,15 @@ fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
 .then(res => res.json())
 .then(data => {
     data.forEach(element => {
+        // issue 1
         if (currentUser !== null) {
             if (currentUser['id'] == element.user_id) {
-                createElement(element.id, element.playlist_id, element.song_path, element.title, 'inline-block', element.likes, element.liked)
+                createElement(element.id, element.playlist_id, element.song_path, element.title, 'inline-block', element.likes, element.liked, element.fav)
             } else {
-                createElement(element.id, element.playlist_id, element.song_path, element.title, 'none', element.likes, element.liked)
+                createElement(element.id, element.playlist_id, element.song_path, element.title, 'none', element.likes, element.liked, element.fav)
             }
         } else {
-            createElement(element.id, element.playlist_id, element.song_path, element.title, 'none', element.likes, element.liked)
+            createElement(element.id, element.playlist_id, element.song_path, element.title, 'none', element.likes, element.liked, element.fav)
         }
     });
     let progressBar = document.getElementById("range")
@@ -214,7 +215,7 @@ fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
     console.log(err)
 })
 
-function createElement(id, playlist_id, song_path, song_title, see, likes, liked) {
+function createElement(id, playlist_id, song_path, song_title, see, likes, liked, fav) {
     let box = document.getElementById('box')
 
     let playlist = document.createElement('ul');
@@ -236,6 +237,7 @@ function createElement(id, playlist_id, song_path, song_title, see, likes, liked
 
     let title = document.createElement('p');
     title.classList.add('music');
+    title.setAttribute('id', `title-${id}`)
     title.style.fontSize = '1.2rem'
     title.style.fontWeight = 'bold'
     title.textContent = song_title;
@@ -272,41 +274,28 @@ function createElement(id, playlist_id, song_path, song_title, see, likes, liked
     trashIcon.style.display = see
     trashIcon.setAttribute("onClick", `deleteSong(${id})`);
 
-    let tooltip1 = document.createElement('span');
-    tooltip1.classList.add('tooltip');
+    let tooltip = document.createElement('span');
+    tooltip.classList.add('tooltip');
     
-    let starIcon1 = document.createElement('i');
-    starIcon1.classList.add('fa-regular', 'fa-star', 'tooltip');
+    let starIcon = document.createElement('i');
+    starIcon.classList.add(fav, 'fa-star', 'tooltip');
+    starIcon.setAttribute('id', `add-${id}`)
+    starIcon.setAttribute('onClick', `addToFav(${id})`)
 
-    let tooltipText1 = document.createElement('span');
-    tooltipText1.classList.add('tooltiptext');
-    tooltipText1.textContent = 'add to favorite';
+    let tooltipText = document.createElement('span');
+    tooltipText.classList.add('tooltiptext');
+    tooltipText.textContent = 'add to favorite';
 
-    starIcon1.appendChild(tooltipText1);
+    starIcon.appendChild(tooltipText);
 
-    tooltip1.appendChild(starIcon1);
-
-    let tooltip2 = document.createElement('span');
-    tooltip2.classList.add('tooltip');
-
-    let starIcon2 = document.createElement('i');
-    starIcon2.classList.add('fa-solid', 'fa-star', 'tooltip', 'hide');
-
-    let tooltipText2 = document.createElement('span');
-    tooltipText2.classList.add('tooltiptext');
-    tooltipText2.textContent = 'remove from favorite';
-
-    starIcon2.appendChild(tooltipText2);
-
-    tooltip2.appendChild(starIcon2);
+    tooltip.appendChild(starIcon);
 
     div2.appendChild(playIcon);
     div2.appendChild(pauseIcon);
     div2.appendChild(heartIcon);
     div2.appendChild(span)
     div2.appendChild(trashIcon);
-    div2.appendChild(tooltip1);
-    div2.appendChild(tooltip2);
+    div2.appendChild(tooltip);
 
     listItem.appendChild(div1);
     listItem.appendChild(div2);

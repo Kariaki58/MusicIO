@@ -79,12 +79,14 @@ def query_playlist():
         content_list.append(playlists)
     return content_list
 
+
 @my_api_views.route("/playlist", methods=['GET'])
 def get_playlist():
     from musicapp.models.playlist import Playlist
     
     content_list = query_playlist()
     return jsonify(content_list)
+
 
 @my_api_views.route('/playlist', methods=['POST'])
 def insert_playlist_to_db():

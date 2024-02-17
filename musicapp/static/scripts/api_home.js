@@ -9,9 +9,9 @@ const ul = document.getElementById("base_ul");
 const menuItems = [
     { label: "login", url: "api_login.html", id: "login" },
     { label: "register", url: "api_register.html", id: "register" },
-    { label: "Logout", url: "", id: "logout" }
+    { label: "Profile", url: "account.html", id: "account"},
+    { label: "Logout", url: "api_login.html", id: "logout" }
 ];
-
 
 menuItems.forEach(item => {
     const li = document.createElement("li");
@@ -27,8 +27,10 @@ menuItems.forEach(item => {
 
 if (localStorageData === null) {
     let logoutElement = document.getElementById('logout')
+    let profileElement = document.getElementById('account')
 
     logoutElement.style.display = 'none'
+    profileElement.style.display = 'none'
 } else {
     let loginElement = document.getElementById('login');
     let registerElement = document.getElementById('register')
