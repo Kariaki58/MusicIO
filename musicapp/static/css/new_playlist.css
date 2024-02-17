@@ -19,7 +19,7 @@ body {
 }
 
 .playlist {
-    background-color: darkgray;
+    background-color: rgb(43, 31, 31);
     list-style: none;
     padding: 0;
     border-radius: 8px;
@@ -35,7 +35,6 @@ body {
 }
 
 .playlist li a {
-    color: blue;
     text-decoration: underline;
 }
 
@@ -46,7 +45,7 @@ body {
 
 .fa-play,
 .fa-heart {
-    color: #3498db;
+    color: darkorchid;
     padding: 5px;
     margin-right: 0.5em;
 }
@@ -57,6 +56,10 @@ body {
 
 .display_ul {
     list-style: none;
+}
+
+.fa-star {
+    color: darkorchid;
 }
 
 .tooltip {
@@ -108,6 +111,6 @@ li .hide {
 }
 
 .fa-trash-can {
-    color: black;
+    color: darkorchid;
     margin-right: 0.5em;
 }

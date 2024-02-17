@@ -3,16 +3,25 @@ const playlistId = urlParams.get('playlistId');
 
 let currentUser = JSON.parse(localStorage.getItem('current_user'))
 
+let formData = new FormData()
+
+formData.append('user', currentUser.id)
+
 fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
-    method: 'GET'
+    method: 'POST',
+    body: formData
 })
 .then(res => res.json())
 .then(data => {
     data.forEach(element => {
-        if (currentUser['id'] == element.user_id) {
-            createElement(element.id, element.playlist_id, element.song_path, element.title, 'inline-block')
+        if (currentUser !== null) {
+            if (currentUser['id'] == element.user_id) {
+                createElement(element.id, element.playlist_id, element.song_path, element.title, 'inline-block', element.likes, element.liked)
+            } else {
+                createElement(element.id, element.playlist_id, element.song_path, element.title, 'none', element.likes, element.liked)
+            }
         } else {
-            createElement(element.id, element.playlist_id, element.song_path, element.title, 'none')
+            createElement(element.id, element.playlist_id, element.song_path, element.title, 'none', element.likes, element.liked)
         }
     });
     let progressBar = document.getElementById("range")
@@ -31,7 +40,7 @@ fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
     let currentlyPlayingMusic = null;
     let audioElement = null;
     let music = null;
-    
+
     function enablePlayMusic(id) {
         let musicElement = null;
         for (let i = 0; i < musicList.length; i++) {
@@ -151,16 +160,8 @@ fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
         }
         if (/^heart-\d+$/.test(id)) {
             let likeId = document.getElementById(id);
-            let idChange = 'heart-x-' + musicId
-            let heartSolid = document.getElementById(idChange)
-            likeId.style.display = 'none'
-            heartSolid.style.display = 'inline-block'
-        } else if (/^heart-x-\d+$/.test(id)) {
-            let likeId = document.getElementById(id);
             let idChange = 'heart-' + musicId
             let heartSolid = document.getElementById(idChange)
-            likeId.style.display = 'none'
-            heartSolid.style.display = 'inline-block'
         }
     }
 
@@ -213,7 +214,7 @@ fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
     console.log(err)
 })
 
-function createElement(id, playlist_id, song_path, song_title, display) {
+function createElement(id, playlist_id, song_path, song_title, see, likes, liked) {
     let box = document.getElementById('box')
 
     let playlist = document.createElement('ul');
@@ -235,6 +236,8 @@ function createElement(id, playlist_id, song_path, song_title, display) {
 
     let title = document.createElement('p');
     title.classList.add('music');
+    title.style.fontSize = '1.2rem'
+    title.style.fontWeight = 'bold'
     title.textContent = song_title;
 
     div1.appendChild(title);
@@ -251,28 +254,27 @@ function createElement(id, playlist_id, song_path, song_title, display) {
     pauseIcon.setAttribute('id', `pause-${id}`);
     pauseIcon.setAttribute('data-music-id', id)
 
+    let span = document.createElement('span');
+    span.classList.add(`like-count-${id}`);
+    span.setAttribute('id', `like-count-${id}`)
+
     let heartIcon = document.createElement('i');
-    heartIcon.classList.add('fa-regular', 'fa-heart', 'i');
+    heartIcon.classList.add(liked, 'fa-heart', 'i');
     heartIcon.setAttribute('id', `heart-${id}`);
+    heartIcon.setAttribute('onClick', `likeSong(${id})`)
     heartIcon.setAttribute('data-music-id', id)
-
-    let hiddenHeartIcon = document.createElement('i');
-    hiddenHeartIcon.classList.add('fa-solid', 'fa-heart', 'i', 'hide');
-    hiddenHeartIcon.setAttribute('id', `heart-x-${id}`);
-    hiddenHeartIcon.setAttribute('data-music-id', id);
-
 
 
     let trashIcon = document.createElement('i');
     trashIcon.classList.add('fa-solid', 'fa-trash-can', 'i', 'show');
-    // ************************verify user on delete**************************
+
     trashIcon.setAttribute('id', `trash-${id}`);
-    trashIcon.style.display = display
+    trashIcon.style.display = see
     trashIcon.setAttribute("onClick", `deleteSong(${id})`);
 
     let tooltip1 = document.createElement('span');
     tooltip1.classList.add('tooltip');
-
+    
     let starIcon1 = document.createElement('i');
     starIcon1.classList.add('fa-regular', 'fa-star', 'tooltip');
 
@@ -301,7 +303,7 @@ function createElement(id, playlist_id, song_path, song_title, display) {
     div2.appendChild(playIcon);
     div2.appendChild(pauseIcon);
     div2.appendChild(heartIcon);
-    div2.appendChild(hiddenHeartIcon);
+    div2.appendChild(span)
     div2.appendChild(trashIcon);
     div2.appendChild(tooltip1);
     div2.appendChild(tooltip2);

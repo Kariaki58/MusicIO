@@ -8,3 +8,4 @@ if my_api_views:
     from musicapp.my_api.authentication import *
     from musicapp.my_api.song_list import *
     from musicapp.my_api.remove_song import *
+    from musicapp.my_api.like import *

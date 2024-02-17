@@ -95,7 +95,7 @@ def insert_playlist_to_db():
     title = request.form.get('title')
     artist_name = request.form.get('artistName')
     user = request.form.get('user')
-
+    
     user_validate = user_input_validation(title, artist_name)
     if user_validate == "song":
         return jsonify({'message': 'song name already exist'})

@@ -7,7 +7,6 @@ function RenderPlaylist(data, element) {
     cardDiv.classList.add("card");
 
     let iconElement = document.createElement("i");
-
     iconElement.classList.add("fa-solid", "fa-play");
     iconElement.id = "icon";
 
@@ -67,4 +66,3 @@ inputSubmit.addEventListener('click', (e) => {
         window.location.href = window.location.origin + '/musicapp/templates/api_login.html';
     }
 });
-
