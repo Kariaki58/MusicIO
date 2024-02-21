@@ -7,7 +7,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 
 @my_api_views.route('/users/del', methods=['DELETE'])
-def remove_song():
+def remove_user():
     """Remove a user
         Request:
           urlencoded form data: user_id
