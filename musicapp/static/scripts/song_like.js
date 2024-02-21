@@ -11,9 +11,9 @@ function updateLikeState(songId) {
     }
 }
 
-song_list.forEach(song => {
-    updateLikeState(song.id);
-});
+// song_list.forEach(song => {
+//     updateLikeState(song.id);
+// });
 
 function likeSong(id) {
     let formData = new FormData();

@@ -21,3 +21,13 @@ h1.logo {
     width: 500px;
     height: auto;
 }
+
+#plot2d {
+    background-color: rgb(7, 7, 7);
+    padding: 2em;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1000px;
+    height: 500px;
+    margin: 10px auto auto;
+}

@@ -2,27 +2,40 @@ const urlParams = new URLSearchParams(window.location.search);
 const playlistId = urlParams.get('playlistId');
 
 let currentUser = JSON.parse(localStorage.getItem('current_user'))
-
 let formData = new FormData()
+let url = ''
 
-formData.append('user', currentUser.id)
+if (currentUser) {
+    formData.append('user', currentUser.id)    
+}
 
-fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
+if (playlistId === null) {
+    url = 'http://127.0.0.1:5000/favourite'
+} else {
+    url = `http://127.0.0.1:5000/${playlistId}/songs`
+}
+
+formData.append('playlist_id', playlistId);
+
+fetch(url, {
     method: 'POST',
     body: formData
 })
 .then(res => res.json())
 .then(data => {
     data.forEach(element => {
-        // issue 1
-        if (currentUser !== null) {
-            if (currentUser['id'] == element.user_id) {
-                createElement(element.id, element.playlist_id, element.song_path, element.title, 'inline-block', element.likes, element.liked, element.fav)
-            } else {
-                createElement(element.id, element.playlist_id, element.song_path, element.title, 'none', element.likes, element.liked, element.fav)
-            }
+        if (playlistId === null && currentUser !== null) {
+            createElement(element.song_id, element.song_path, element.artist_name, 'none', element.liked, element.fav)
         } else {
-            createElement(element.id, element.playlist_id, element.song_path, element.title, 'none', element.likes, element.liked, element.fav)
+            if (currentUser !== null) {
+                if (currentUser['id'] == element.user_id) {
+                    createElement(element.id, element.song_path, element.title, 'inline-block', element.liked, element.fav)
+                } else {
+                    createElement(element.id, element.song_path, element.title, 'none', element.liked, element.fav)
+                }
+            } else {
+                createElement(element.id, element.song_path, element.title, 'none', element.liked, element.fav)
+            }
         }
     });
     let progressBar = document.getElementById("range")
@@ -159,11 +172,6 @@ fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
                 }
             });
         }
-        if (/^heart-\d+$/.test(id)) {
-            let likeId = document.getElementById(id);
-            let idChange = 'heart-' + musicId
-            let heartSolid = document.getElementById(idChange)
-        }
     }
 
     function PlayMusic(music) {
@@ -215,7 +223,7 @@ fetch(`http://127.0.0.1:5000/${playlistId}/songs`, {
     console.log(err)
 })
 
-function createElement(id, playlist_id, song_path, song_title, see, likes, liked, fav) {
+function createElement(id, song_path, song_title, see, liked, fav) {
     let box = document.getElementById('box')
 
     let playlist = document.createElement('ul');

@@ -3,6 +3,7 @@ function goHome() {
 }
 
 let localStorageData = JSON.parse(localStorage.getItem('current_user'))
+let user = document.getElementById('user')
 const ul = document.getElementById("base_ul");
 
 
@@ -43,3 +44,5 @@ if (localStorageData === null) {
         localStorage.removeItem('current_user')
     })
 }
+
+user.innerHTML = "Hi " + localStorageData.username

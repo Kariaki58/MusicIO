@@ -4,12 +4,30 @@ from flask import jsonify, make_response, request
 from musicapp.my_api import my_api_views
 
 
+
+
+@my_api_views.route('/likes', methods=['POST'])
+def get_like_analytics():
+    from musicapp.models.song import Song
+
+    current_user = request.form.get('user')
+    
+    song_X_value = Song.query.filter(Song.user_id == current_user).all()
+    X_value = []
+    Y_value = []
+
+    for songs in song_X_value:
+        X_value.append(songs.title)
+        Y_value.append(len(songs.likes))
+
+    return jsonify({'X_value': X_value, 'Y_value': Y_value})
+
+
 @my_api_views.route('/like/<int:id>', methods=['POST'])
 def like_song(id):
     from musicapp.models.song import Song
 
     current_user = request.form.get('user')
-
 
     song = Song.query.filter_by(id=id).first()
     like = Like.query.filter_by(user_id=current_user, song_id=id).first()

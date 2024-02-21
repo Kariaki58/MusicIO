@@ -16,9 +16,9 @@ def tear(self):
     """Tear down app context"""
     database.session.remove()
 
-@app.route('/')
-def index():
-    return redirect(url_for('home.home_page'))
+# @app.route('/')
+# def index():
+#     return redirect(url_for('home.home_page'))
 
 
 if __name__ == "__main__":

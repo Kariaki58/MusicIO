@@ -1,8 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from musicapp.routes.home import home
-from musicapp.routes.song_list import song
 from flask_cors import CORS
 from flask_mail import Mail
 
@@ -34,9 +32,6 @@ def create_app():
     login_manager.init_app(app)
     mail.init_app(app)
 
-
-    app.register_blueprint(home)
-    app.register_blueprint(song)
 
     with app.app_context():
         database.create_all()
