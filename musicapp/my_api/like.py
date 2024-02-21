@@ -1,31 +1,44 @@
-# from musicapp import database
-# from musicapp.models.like import Like
-# from flask import jsonify, make_response, request
-# from musicapp.my_api import my_api_views
+from musicapp import database
+from musicapp.models.like import Like
+from flask import jsonify, make_response, request
+from musicapp.my_api import my_api_views
 
 
-# @my_api_views.route('/like', methods=['POST'])
-# def like_a_song():
-#     """API endpoint to like a song"""
-#     try:
-#         validateLikeRequest(request)
-#         data = request.json
-#         like = Like(user_id=data["user_id"], song_id=data["song_id"])
-#         database.session.add(like)
-#         database.session.commit()
-
-#         ret = {"error": False, "message" : "song like successful"}
-#         return make_response(jsonify(ret), 201)
-
-#     except ValueError as e:
-#         # Please log the exception if possible
-#         return make_response(jsonify({"error": True, "message" : "Bad request"}), 400)
 
 
-# def validateLikeRequest(req):
-#     """Validate a /like endpoint data"""
-#     data = req.json
-#     if not data.get("song_id"):
-#         raise ValueError("song_id param missing")
-#     if not data.get("user_id"):
-#         raise ValueError("user_id param missing")
+@my_api_views.route('/likes', methods=['POST'])
+def get_like_analytics():
+    from musicapp.models.song import Song
+
+    current_user = request.form.get('user')
+    
+    song_X_value = Song.query.filter(Song.user_id == current_user).all()
+    X_value = []
+    Y_value = []
+
+    for songs in song_X_value:
+        X_value.append(songs.title)
+        Y_value.append(len(songs.likes))
+
+    return jsonify({'X_value': X_value, 'Y_value': Y_value})
+
+
+@my_api_views.route('/like/<int:id>', methods=['POST'])
+def like_song(id):
+    from musicapp.models.song import Song
+
+    current_user = request.form.get('user')
+
+    song = Song.query.filter_by(id=id).first()
+    like = Like.query.filter_by(user_id=current_user, song_id=id).first()
+    
+    if not song:
+        return jsonify({'error': 'song don\'t exist'}, 404)
+    elif like:
+        database.session.delete(like)
+        database.session.commit()
+    else:
+        like = Like(user_id=current_user, song_id=id)
+        database.session.add(like)
+        database.session.commit()
+    return jsonify({'likes': len(song.likes), "liked": int(current_user) in map(lambda x: x.user_id, song.likes)})

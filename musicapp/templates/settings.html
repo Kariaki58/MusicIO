@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/settings.css">
+    <link rel="stylesheet" href="../static/css/navigation.css">
+    <link rel="stylesheet" href="../static/css/base.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="nav-box">
+		<nav class="navbar">
+			<h1 onclick="goHome()" class="logo"></h1>
+			<ul class="base_ul" id="base_ul">
+			</ul>
+		</nav>
+	</div>
+    <div class="container">
+        <h1>Settings</h1>
+
+        <div class="update_form">
+            <form action="">
+                <div class="input">
+                    <input id="playlist-name" type="text" placeholder="Update Playlist Name" required>
+                </div>
+                <div class="button">
+                    <button id="change-name">Change</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="red-btn">
+
+            <div class="others">
+                    <button id="del-playlist">Delete Playlist</button>
+            </div>
+            <div class="others">
+                <button id="del-accout">Delete Account</button>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    <script src="../static/scripts/api_home.js"></script>
+    <script src="../static/scripts/settings.js"></script>
+</body>
+</html>

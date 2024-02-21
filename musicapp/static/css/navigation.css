@@ -19,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     background-color: rgb(52, 41, 56);
-    padding: 1em;
+    padding: 1rem;
     color: white;
     z-index: 99999999999;
 }

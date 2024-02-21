@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ab1f2130e0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/profile.css">
+    <link rel="stylesheet" href="../static/css/navigation.css">
+    <link rel="stylesheet" href="../static/css/base.css">
+    <title>Profile Page</title>
+</head>
+<body>
+    <div class="nav-box">
+		<nav class="navbar">
+			<h1 onclick="goHome()" class="logo"></h1>
+			<ul class="base_ul" id="base_ul">
+			</ul>
+		</nav>
+	</div>
+    <div class="wrapper">
+        <div class="card">
+            <i class="fa-regular fa-user"></i>
+            <h2 id="user">Username</h2>
+        </div>
+        <div class="columns">
+            <div class="favourites element" id="favourites">
+                <i class="fa-solid fa-star"></i>
+                <h4>Favourites</h4>
+            </div>
+            <div class="settings card-space element" id="settings">
+                <i class="fa-solid fa-gear"></i>
+                <h4>Settings</h4>
+            </div>
+            <div class="comments card-space element" id="comments">
+                <i class="fa-solid fa-comments"></i>
+                <h4>Comments</h4>
+            </div>
+            <div class="likes card-space element" id="likes">
+                <i class="fa-solid fa-heart"></i>
+                <h4>Likes</h4>
+            </div>
+        </div>
+    </div>
+    <script src="../static/scripts/account.js"></script>
+    <script src="../static/scripts/api_home.js"></script>
+</body>
+</html>

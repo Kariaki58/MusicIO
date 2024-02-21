@@ -2,9 +2,32 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* background-color: rgb(29, 32, 32); */
 }
 
-body {
+html {
+    overflow-y: auto;
     font-family: Arial, Helvetica, sans-serif;
+    background-image: url('../images/music.png');
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+h1.logo {
+    background: url('../images/logo.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 500px;
+    height: auto;
+}
+
+#plot2d {
+    background-color: rgb(7, 7, 7);
+    padding: 2em;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1000px;
+    height: 500px;
+    margin: 10px auto auto;
 }
