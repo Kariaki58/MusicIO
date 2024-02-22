@@ -3,7 +3,9 @@ from musicapp import database
 
 
 class Comment(BaseModel, database.Model):
-
+    """
+    comment database
+    """
     __tablename__ = 'comments'
 
     text = database.Column(database.Text, nullable=False)

@@ -15,11 +15,11 @@ function addToFav(id) {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
         if (data["starred"]) {
             starBtn.className = 'fa-solid fa-star'
         } else {
             starBtn.className = 'fa-regular fa-star'
         }
+        // window.location.reload()
     })
 }

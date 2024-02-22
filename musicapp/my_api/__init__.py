@@ -11,3 +11,5 @@ if my_api_views:
     from musicapp.my_api.like import *
     from musicapp.my_api.favourite import *
     from musicapp.my_api.update_playlist import *
+    from musicapp.my_api.del_playlist import *
+    from musicapp.my_api.del_account import *

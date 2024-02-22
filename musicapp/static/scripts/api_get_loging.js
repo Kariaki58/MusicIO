@@ -27,7 +27,7 @@ submit.addEventListener('click', (e) => {
         } else {
             if (data[0].message === "login sucessful") {
                 StoreInLocalStorage(JSON.stringify(data[1]))
-                const songListUrl = window.location.origin + '/musicapp/templates/render_api_playlist.html';
+                const songListUrl = window.location.origin + '/musicapp/templates/home.html';
                 window.location.href = songListUrl
             } else if (data[0].message === "invalid email") {
                 alert(data[0].message)
