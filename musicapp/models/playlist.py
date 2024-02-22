@@ -3,10 +3,10 @@ from musicapp import database
 
 
 class Playlist(BaseModel, database.Model):
-    __tablename__ = 'playlists'
     """
     playlist database.
     """
+    __tablename__ = 'playlists'
     title = database.Column(database.String(120), nullable=False, unique=True)
     artist_name = database.Column(database.String(120), nullable=False)
     playlist_name = database.Column(database.String(120), nullable=False, unique=True)

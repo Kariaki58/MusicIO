@@ -5,11 +5,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(BaseModel, database.Model, UserMixin):
-
-    __tablename__ = 'users'
     """
     user table model
     """
+    __tablename__ = 'users'
     email = database.Column(database.String(120), unique=True, nullable=False)
     password = database.Column(database.String(200), nullable=False)
     username = database.Column(database.String(120), unique=True, nullable=False)
