@@ -1,10 +1,11 @@
 let btn = document.getElementById('change-name')
-console.log("settings")
+let currentUser = JSON.parse(localStorage.getItem('current_user'))['id']
 
-btn.addEventListener('click', () => {
+btn.addEventListener('click', (e) => {
+    e.preventDefault()
     let playlistName = document.getElementById('playlist-name').value
     let formData = new FormData()
-
+    formData.append('current_user', currentUser)
     if (playlistName === '') {
         alert('empty playlist name');
     } else {
@@ -16,7 +17,10 @@ btn.addEventListener('click', () => {
             body: formData
         })
         .then(res => res.json())
-        .then(data => alert(data['message']))
-        .catch(err => alert("error occured"))
+        .then(data => {
+            console.log(data)
+            alert(data['message'])
+        })
+        .catch(err => alert('no playlist created'))
     }
 })

@@ -11,13 +11,14 @@ def update_playlist_name():
 
 
     new_playlist_name = request.form.get('playlist_name')
+    current_user = request.form.get('current_user')
 
-    print(new_playlist_name)
-    print("here")
-    playlist_change = Playlist.query.filter(Playlist.playlist_name == new_playlist_name).first()
+    playlist_change = Playlist.query.filter(Playlist.user_id == current_user).first()
+
+    if not playlist_change:
+        return jsonify({'message': 'no playlist created'})
     playlist_change.playlist_name = new_playlist_name
 
-    database.commit()
+    database.session.commit()
 
     return jsonify({'message': 'playlist updated successfully'})
-    

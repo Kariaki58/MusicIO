@@ -1,5 +1,5 @@
 function goHome() {
-    window.location.href = window.location.origin + '/musicapp/templates/render_api_playlist.html';
+    window.location.href = window.location.origin + '/musicapp/templates/home.html';
 }
 
 let localStorageData = JSON.parse(localStorage.getItem('current_user'))
