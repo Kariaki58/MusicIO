@@ -3,10 +3,10 @@ from musicapp import database
 
 
 class Song(BaseModel, database.Model):
-    __tablename__ = 'songs'
     """
     user songs uploads
     """
+    __tablename__ = 'songs'
     title = database.Column(database.String(255), nullable=False, unique=True)
     song_path = database.Column(database.String(255), nullable=False)
     user_id = database.Column(database.Integer, database.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)

@@ -4,7 +4,6 @@ from flask import request, jsonify
 from musicapp import database
 
 
-
 @my_api_views.route('/update_playlist_name', methods=['POST'])
 def update_playlist_name():
     from musicapp.models.playlist import Playlist
