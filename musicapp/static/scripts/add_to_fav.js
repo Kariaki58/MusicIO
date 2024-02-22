@@ -20,6 +20,6 @@ function addToFav(id) {
         } else {
             starBtn.className = 'fa-regular fa-star'
         }
-        // window.location.reload()
+        window.location.reload()
     })
 }

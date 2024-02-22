@@ -1,5 +1,4 @@
 let inputSubmit = document.getElementById("submit")
-
 let current_user = JSON.parse(localStorage.getItem('current_user'));
 let playlistName = document.getElementById('playlist_name')
 
@@ -56,8 +55,6 @@ fetch('http://127.0.0.1:5000/playlist', {
 
 inputSubmit.addEventListener('click', (e) => {
     e.preventDefault();
-
-    console.log('clicked')
     let localData = localStorage.getItem(`playlist ${current_user['id']}`)
 
 
@@ -76,7 +73,6 @@ inputSubmit.addEventListener('click', (e) => {
     } else if (artistName === "") {
         alert('artist name is empty')
     }
-
     if (fileInput != undefined && title != "" && (playlistName != "" || localData == `playlist ${current_user['id']}`) && artistName != ""){
         formData.append('fileInput', fileInput);
         formData.append('title', title);
