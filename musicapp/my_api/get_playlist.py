@@ -38,7 +38,7 @@ def handle_user_form(title, artist_name, playlist_name, file, user):
 
         new_filepath = os.path.join(folder_parent, parent_child, app.config['UPLOAD_FOLDER'], new_filename)
         os.rename(filepath, new_filepath)
-        playlist_query = Playlist.query.filter(Playlist.user_id==user).first() # create only one playlist.
+        playlist_query = Playlist.query.filter(Playlist.user_id==user).first()
         playlist_is_valid = playlist_query is None
         song_path = f'{app.config["UPLOAD_FOLDER"]}/{new_filename}'
         if playlist_is_valid:
@@ -87,6 +87,7 @@ def get_playlist():
     from musicapp.models.playlist import Playlist
     
     content_list = query_playlist()
+    content_list.reverse()
     return jsonify(content_list)
 
 
@@ -101,11 +102,6 @@ def insert_playlist_to_db():
     playlist_name = request.form.get('playlistName')
     user = request.form.get('user')
     
-    print(file)
-    print(title)
-    print(artist_name)
-    print(playlist_name)
-    print(user)
     user_validate = user_input_validation(title, playlist_name)
     if user_validate == "song":
         return jsonify({'message': 'Song name already exist'})
