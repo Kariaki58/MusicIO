@@ -68,7 +68,7 @@ inputSubmit.addEventListener('click', (e) => {
         alert('no file selected')
     } else if (title === "") {
         alert('add a song title')
-    } else if (playlistName === "" && localData === `playlist ${current_user['id']}`) {
+    } else if (playlistName === "" && localData !== `playlist ${current_user['id']}`) {
         alert('add a playlist name')
     } else if (artistName === "") {
         alert('artist name is empty')
@@ -88,6 +88,7 @@ inputSubmit.addEventListener('click', (e) => {
             .then(response => response.json())
             .then(data => {
                 localStorage.setItem(`playlist ${current_user['id']}`, `playlist ${current_user['id']}`)
+                console.log(data['message'])
                 alert(data['message'])
             })
             .catch(err => alert("An error occurred: " + err));
